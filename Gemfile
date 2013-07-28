@@ -42,3 +42,29 @@ gem 'jbuilder', '~> 1.2'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'compass-rails'
+gem 'figaro'
+gem 'haml-rails'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'simple_form', '>= 3.0.0.rc'
+gem 'thin'
+gem 'zurb-foundation'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'html2haml'
+  gem 'quiet_assets'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'email_spec'
+end
+
