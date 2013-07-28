@@ -1,0 +1,11 @@
+= simple_form_for(@day_summary) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :day
+    = f.input :summary
+    = f.association :blog_post
+    = f.input :metadata
+
+  .form-actions
+    = f.button :submit

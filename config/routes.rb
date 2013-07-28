@@ -1,4 +1,8 @@
 QuantifiedLife::Application.routes.draw do
+  resources :blog_posts
+
+  resources :day_summaries
+
   root :to => "home#index"
   resources :users, :only => [:index, :show, :edit, :update ]
   get '/auth/:provider/callback' => 'sessions#create'

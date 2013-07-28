@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130728020351) do
+ActiveRecord::Schema.define(version: 20130728022839) do
+
+  create_table "blog_posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "day_summaries", force: true do |t|
+    t.date     "day"
+    t.string   "summary"
+    t.integer  "blog_post_id"
+    t.text     "metadata"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "impact"
+  end
+
+  add_index "day_summaries", ["blog_post_id"], name: "index_day_summaries_on_blog_post_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

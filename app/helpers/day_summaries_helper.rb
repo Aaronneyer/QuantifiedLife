@@ -1,0 +1,2 @@
+module DaySummariesHelper
+end
