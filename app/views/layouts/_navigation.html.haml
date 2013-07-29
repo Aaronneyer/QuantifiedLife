@@ -1,12 +1,9 @@
 .navbar
-  = link_to "Quantifiedlife", root_path, class: 'navbar-brand'
-  %ul.nav.navbar-nav
-    - if user_signed_in?
-      %li
-        %p.navbar-text
-          Logged in as #{current_user.name}
-      %li
-        = link_to 'Logout', signout_path
-    - else
-      %li
-        = link_to 'Login', signin_path
+  = link_to "QuantifiedLife", root_path, class: 'navbar-brand'
+  - if user_signed_in?
+    %ul.nav.navbar-nav
+      %li= link_to "My Day", new_day_path, class: 'navbar-link'
+      %li= link_to "My Days", days_path, class: 'navbar-link'
+    %p.navbar-text.pull-right
+      Logged in as #{current_user.name}
+      = link_to 'Logout', signout_path

@@ -15,6 +15,7 @@ class DaysController < ApplicationController
   # GET /days/new
   def new
     @day = Day.new
+    @day.date = Date.yesterday
   end
 
   # GET /days/1/edit
@@ -59,6 +60,7 @@ class DaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def day_params
-      params.require(:day).permit(:date, :summary, :blog_post_id, :metadata)
+      params.require(:day).permit(:date, :summary, :blog_post_id, :metadata, :trees,
+                                  :miles_walked, :hours_worked)
     end
 end

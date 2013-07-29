@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   def self.create_with_omniauth(auth)
+    raise SecurityError, "No creating users!"
     create! do |user|
       user.provider = auth['provider']
       user.uid = auth['uid']

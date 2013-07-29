@@ -1,13 +1,24 @@
-= form_for(@day, 'ng-controller' => 'DayCtrl') do |f|
+= form_for(@day, html: { 'ng-controller' => 'DayCtrl' }) do |f|
 
   .form-group
     = f.label :date
-    = f.text_field :date, { 'bs-datepicker' => '' }
+    .input-group
+      = f.text_field :date, 'bs-datepicker' => '', 'ng-model' => 'date', 'ng-init' => "date='#{@day.date}'",
+        'data-date-format' => 'yyyy/mm/dd'
 
   .form-group
     = f.label :summary
     .input-group
-      = f.text_area :summary, 'ng-model' => 'summary', class: 'form-control'
+      = f.text_area :summary, class: 'form-control', 'ng-model' => 'summary', 'ng-init' => "summary='#{@day.summary}'"
       %span.input-group-addon {{summary.length}}/255
+  .form-group
+    = f.label :trees
+    = f.check_box :trees
+  .form-group
+    = f.label :miles_walked
+    = f.text_field :miles_walked
+  .form-group
+    = f.label :hours_worked
+    = f.text_field :hours_worked
 
   = f.submit

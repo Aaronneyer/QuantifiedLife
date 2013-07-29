@@ -4,5 +4,5 @@ $(document).on('ready page:load', ->
   angular.bootstrap(document, ['quantified'])
 )
 
-@app.controller('DaySummaryCtrl', ->
+@app.controller('DayCtrl', ($scope) ->
 )
