@@ -16,11 +16,13 @@ gem 'omniauth-google-oauth2'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 gem 'zurb-foundation'
+gem 'rails_metadata'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
   gem 'html2haml'
   gem 'quiet_assets'
+  gem 'pry'
 end
 group :development, :test do
   gem 'rspec-rails'
