@@ -1,0 +1,13 @@
+= form_for(@day, 'ng-controller' => 'DayCtrl') do |f|
+
+  .form-group
+    = f.label :date
+    = f.text_field :date, { 'bs-datepicker' => '' }
+
+  .form-group
+    = f.label :summary
+    .input-group
+      = f.text_area :summary, 'ng-model' => 'summary', class: 'form-control'
+      %span.input-group-addon {{summary.length}}/255
+
+  = f.submit

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @day.date
+%p
+  %b Summary:
+  = @day.summary
+%p
+  %b Blog post:
+  = @day.blog_post
+%p
+  %b Metadata:
+  = @day.metadata
+
+= link_to 'Edit', edit_day_path(@day)
+\|
+= link_to 'Back', days_path

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "DaySummaries" do
-  describe "GET /day_summaries" do
+describe "Days" do
+  describe "GET /days" do
     it "works! (now write some real specs)" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get day_summaries_path
+      get days_path
       response.status.should be(200)
     end
   end

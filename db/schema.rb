@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130728022839) do
+ActiveRecord::Schema.define(version: 20130729082128) do
 
   create_table "blog_posts", force: true do |t|
     t.string   "title"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20130728022839) do
     t.datetime "updated_at"
   end
 
-  create_table "day_summaries", force: true do |t|
-    t.date     "day"
+  create_table "days", force: true do |t|
+    t.date     "date"
     t.string   "summary"
     t.integer  "blog_post_id"
     t.text     "metadata"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20130728022839) do
     t.integer  "impact"
   end
 
-  add_index "day_summaries", ["blog_post_id"], name: "index_day_summaries_on_blog_post_id"
+  add_index "days", ["blog_post_id"], name: "index_days_on_blog_post_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

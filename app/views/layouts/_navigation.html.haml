@@ -1,10 +1,12 @@
-= link_to "Quantifiedlife", root_path, :class => 'brand'
-%ul.nav
-  - if user_signed_in?
-    %li
-      Logged in as #{current_user.name}
-    %li
-      = link_to 'Logout', signout_path
-  - else
-    %li
-      = link_to 'Login', signin_path
+.navbar
+  = link_to "Quantifiedlife", root_path, class: 'navbar-brand'
+  %ul.nav.navbar-nav
+    - if user_signed_in?
+      %li
+        %p.navbar-text
+          Logged in as #{current_user.name}
+      %li
+        = link_to 'Logout', signout_path
+    - else
+      %li
+        = link_to 'Login', signin_path
