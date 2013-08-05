@@ -13,7 +13,6 @@ gem 'haml-rails'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'thin'
-gem 'rails_metadata'
 gem 'angularjs-rails'
 gem 'bootstrap_form'
 group :development do

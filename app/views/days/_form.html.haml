@@ -11,14 +11,29 @@
     .input-group
       = f.text_area :summary, class: 'form-control', 'ng-model' => 'summary', 'ng-init' => "summary='#{@day.summary}'"
       %span.input-group-addon {{summary.length}}/255
-  .form-group
-    = f.label :trees
-    = f.check_box :trees
-  .form-group
-    = f.label :miles_walked
-    = f.text_field :miles_walked
-  .form-group
-    = f.label :hours_worked
-    = f.text_field :hours_worked
 
-  = f.submit
+  .form-group
+    = f.label :impact
+    = f.number_field :impact, min: 0, max: 10
+
+  %h2 Metadata
+
+  .metadata-container{'ng-controller' => 'MetadataCtrl', 'ng-init' => "metadata=#{@attributes}"}
+    .form-group{'ng-controller' => 'MDCtrl', 'ng-repeat' => 'md in metadata'}
+      = label_tag(:key_name, "Key")
+      = text_field_tag(:key_name, "{{md.key_name}}", name: "{{input_name('key_name')}}")
+      %br
+      = label_tag(:type, "Type", 'ng-click' => 'call_debugger()')
+      = select_tag(:type, options_for_select([:integer, :string, :boolean]),
+        name: "{{input_name('type')}}", 'ng-model' => 'md.type')
+      %br
+      = label_tag(:value, "Value")
+      %span{'ng-switch' => '', 'on' => 'md.type'}
+        %input{name: "{{input_name('value')}}", 'ng-model' => 'md.value', type: 'text', 'ng-switch-when' => 'string'}
+        %input{name: "{{input_name('value')}}", 'ng-model' => 'md.value', type: 'number', 'ng-switch-when' => 'integer'}
+        %input{name: "{{input_name('value')}}", 'ng-model' => 'md.value', type: 'checkbox', 'ng-switch-when' => 'boolean'}
+
+    %button{type: 'button', class: 'btn', 'ng-click' => 'metadata.push({})'} Add metadata
+
+
+  = f.submit 'Record Day', class: 'btn'
