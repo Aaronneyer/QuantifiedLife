@@ -11,26 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729082128) do
+ActiveRecord::Schema.define(version: 20130806045904) do
 
-  create_table "blog_posts", force: true do |t|
+# Could not dump table "days" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "days", force: true do |t|
-    t.date     "date"
-    t.string   "summary"
-    t.integer  "blog_post_id"
-    t.text     "metadata"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "impact"
-  end
-
-  add_index "days", ["blog_post_id"], name: "index_days_on_blog_post_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

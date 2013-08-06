@@ -1,5 +1,5 @@
 class Day < ActiveRecord::Base
-  belongs_to :blog_post
+  belongs_to :post
   serialize :metadata
   validates :date, uniqueness: true, presence: true
   validates :summary, presence: true

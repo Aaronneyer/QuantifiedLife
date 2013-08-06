@@ -8,9 +8,9 @@
   = @day.summary
 
 %p
-  %b Blog post:
-  - if @day.blog_post
-    = link_to @day.blog_post.title, @day.blog_post
+  %b Post:
+  - if @day.post
+    = link_to @day.post.title, @day.post
   - else
     None
 

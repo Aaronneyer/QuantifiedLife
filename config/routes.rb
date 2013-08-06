@@ -1,5 +1,5 @@
 QuantifiedLife::Application.routes.draw do
-  resources :blog_posts
+  resources :posts
 
   resources :days, only: [:index, :show, :edit, :update, :new, :create]
 

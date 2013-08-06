@@ -4,13 +4,13 @@
   %tr
     %th Date
     %th Summary
-    %th Blog post
+    %th Post
 
   - @days.each do |day|
     %tr{class: impact_class(day)}
       %td{nowrap: true}= link_to day.date, day
       %td= day.summary
-      %td= link_to day.blog_post.title, day.blog_post if day.blog_post
+      %td= link_to day.post.title, day.post if day.post
 
 %br
 
