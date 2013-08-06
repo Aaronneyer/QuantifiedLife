@@ -55,6 +55,8 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     figaro (0.7.0)
@@ -193,6 +195,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   email_spec
+  factory_girl
   figaro
   haml-rails
   html2haml
