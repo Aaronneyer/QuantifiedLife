@@ -16,6 +16,10 @@
     = f.label :impact
     = f.number_field :impact, min: 0, max: 10
 
+  .form-group
+    = f.label :blog_post_id
+    = f.number_field :blog_post_id
+
 
   .metadata-container{'ng-controller' => 'MetadataCtrl', 'ng-init' => "metadata=#{@attributes}"}
     %h2

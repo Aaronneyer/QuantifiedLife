@@ -1,9 +1,11 @@
-= simple_form_for(@blog_post) do |f|
-  = f.error_notification
+= form_for(@blog_post) do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title
 
-  .form-inputs
-    = f.input :title
-    = f.input :body
+  .form-group
+    = f.label :title
+    = f.text_area :body
 
-  .form-actions
-    = f.button :submit
+  = f.submit "Save Blog Post", class: 'btn'
+

@@ -6,9 +6,14 @@
 %p
   %b Summary:
   = @day.summary
+
 %p
   %b Blog post:
-  = @day.blog_post
+  - if @day.blog_post
+    = link_to @day.blog_post.title, @day.blog_post
+  - else
+    None
+
 %p
   %b Impact:
   = @day.impact

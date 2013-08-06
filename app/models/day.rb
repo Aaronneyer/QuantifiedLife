@@ -33,6 +33,12 @@ class Day < ActiveRecord::Base
     end
   end
 
+  def set_defaults
+    self.default_metadata
+    self.date ||= Date.yesterday
+    self.impact ||= 0
+  end
+
   def default_metadata
     self.metadata = {} unless self.metadata.is_a?(Hash)
     f = Rails.root.join('config', 'default_metadata.yml')

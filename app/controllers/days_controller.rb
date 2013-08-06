@@ -15,8 +15,7 @@ class DaysController < ApplicationController
   # GET /days/new
   def new
     @day = Day.new
-    @day.default_metadata
-    @day.date = Date.yesterday
+    @day.set_defaults
     @attributes = @day.metadata_attributes.to_json
   end
 
