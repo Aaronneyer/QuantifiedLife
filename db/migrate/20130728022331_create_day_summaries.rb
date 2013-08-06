@@ -3,7 +3,7 @@ class CreateDaySummaries < ActiveRecord::Migration
     create_table :day_summaries do |t|
       t.date :day
       t.string :summary
-      t.references :post, index: true
+      t.references :blog_post, index: true
       t.text :metadata
 
       t.timestamps
