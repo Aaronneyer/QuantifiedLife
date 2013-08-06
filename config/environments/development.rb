@@ -1,11 +1,4 @@
 QuantifiedLife::Application.configure do
-  silence_warnings do
-    begin
-      require 'pry'
-      IRB = Pry
-    rescue LoadError
-    end
-  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -46,4 +39,6 @@ QuantifiedLife::Application.configure do
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 
+  # Set default_url for devise
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 end

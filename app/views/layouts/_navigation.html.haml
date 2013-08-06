@@ -5,5 +5,5 @@
       %li= link_to "My Day", new_day_path, class: 'navbar-link'
       %li= link_to "My Days", days_path, class: 'navbar-link'
     %p.navbar-text.pull-right
-      Logged in as #{current_user.name}
-      = link_to 'Logout', signout_path
+      Logged in as #{current_user.email}
+      = link_to 'Logout', destroy_user_session_path, method: :delete
