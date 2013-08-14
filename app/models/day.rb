@@ -1,8 +1,7 @@
 class Day < ActiveRecord::Base
-  belongs_to :post
   serialize :metadata
   validates :date, uniqueness: true, presence: true
-  validates :summary, presence: true
+  has_many :posts
 
   CLASS_MAP = {
     Fixnum => :integer,

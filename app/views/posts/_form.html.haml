@@ -4,8 +4,12 @@
     = f.text_field :title
 
   .form-group
-    = f.label :title
+    = f.label :body
     = f.text_area :body
+
+  .form-group
+    = f.label :date
+    = f.date_field :date
 
   = f.submit "Save Post", class: 'btn'
 

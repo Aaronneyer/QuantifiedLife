@@ -11,26 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130806061026) do
+ActiveRecord::Schema.define(version: 20130814054746) do
 
   create_table "days", force: true do |t|
     t.date     "date"
     t.string   "summary"
-    t.integer  "post_id"
     t.text     "metadata"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "impact"
   end
 
-  add_index "days", ["post_id"], name: "index_days_on_post_id"
+  add_index "days", ["date"], name: "index_days_on_date", unique: true
 
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "day_id"
   end
+
+  add_index "posts", ["day_id"], name: "index_posts_on_day_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

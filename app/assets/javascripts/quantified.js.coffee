@@ -1,11 +1,10 @@
-@app = angular.module('quantified', ['$strap.directives'])
+@app = angular.module('quantified', [])
 
 $(document).on('ready page:load', ->
   angular.bootstrap(document, ['quantified'])
 )
 
 @app.controller('DayCtrl', ($scope) ->
-  $scope.form_count = 0
 )
 
 @app.controller('MetadataCtrl', ($scope, $rootScope) ->

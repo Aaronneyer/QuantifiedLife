@@ -8,11 +8,10 @@
   = @day.summary
 
 %p
-  %b Post:
-  - if @day.post
-    = link_to @day.post.title, @day.post
-  - else
-    None
+  %b Posts
+  %ul
+    - @day.posts.each do |post|
+      %li= link_to post.title, post
 
 %p
   %b Impact:

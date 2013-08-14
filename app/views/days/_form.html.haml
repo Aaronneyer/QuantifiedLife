@@ -3,8 +3,7 @@
   .form-group
     = f.label :date
     .input-group
-      = f.text_field :date, 'bs-datepicker' => '', 'ng-model' => 'date', 'ng-init' => "date='#{@day.date}'",
-        'data-date-format' => 'yyyy/mm/dd'
+      = f.date_field :date
 
   .form-group
     = f.label :summary
@@ -15,11 +14,6 @@
   .form-group
     = f.label :impact
     = f.number_field :impact, min: 0, max: 10
-
-  .form-group
-    = f.label :post_id
-    = f.number_field :post_id
-
 
   .metadata-container{'ng-controller' => 'MetadataCtrl', 'ng-init' => "metadata=#{@attributes}"}
     %h2
