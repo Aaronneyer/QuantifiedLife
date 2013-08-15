@@ -153,7 +153,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sqlite3 (1.3.7)
     stringex (1.5.1)
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -198,7 +197,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.0.0)
   sass-rails
-  sqlite3
   thin
   turbolinks
   uglifier (>= 1.3.0)

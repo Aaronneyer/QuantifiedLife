@@ -17,7 +17,6 @@ gem 'pry-rails'
 gem 'hashie'
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'mongoid_slug'
-gem 'sqlite3'
 
 group :development do
   gem 'better_errors'
