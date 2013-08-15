@@ -1,7 +1,17 @@
-class Day < ActiveRecord::Base
-  serialize :metadata
-  validates :date, uniqueness: true, presence: true
-  has_many :posts
+class Day
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Slug
+
+  field :date, type: Date
+  slug :date
+  field :summary, type: String
+  field :impact, type: Fixnum
+  field :metadatas, type: Hash
+
+  index({ date: 1 }, { unique: true })
+
+  validates :date, presence: true, uniqueness: true
 
   CLASS_MAP = {
     Fixnum => :integer,
@@ -12,10 +22,9 @@ class Day < ActiveRecord::Base
     String => :string
   }
 
-
   def metadata_attributes
-    self.metadata ||= {}
-    metadata.map do |key, value|
+    self.metadatas ||= {}
+    metadatas.map do |key, value|
       Hashie::Mash.new({
         key_name: key,
         type: CLASS_MAP[value.class],
@@ -25,10 +34,10 @@ class Day < ActiveRecord::Base
   end
 
   def metadata_attributes=(attributes)
-    self.metadata = {} unless self.metadata.is_a?(Hash)
+    self.metadatas = {} unless self.metadatas.is_a?(Hash)
     attributes.each do |attr|
       attr = attr.with_indifferent_access
-      self.metadata[attr[:key_name].to_s] = typecast(attr[:value], attr[:type])
+      self.metadatas[attr[:key_name].to_s] = typecast(attr[:value], attr[:type])
     end
   end
 
@@ -39,11 +48,15 @@ class Day < ActiveRecord::Base
   end
 
   def default_metadata
-    self.metadata = {} unless self.metadata.is_a?(Hash)
+    self.metadatas = {} unless self.metadatas.is_a?(Hash)
     f = Rails.root.join('config', 'default_metadata.yml')
     if File.exists? f
-      self.metadata.merge!(YAML.load_file(f))
+      self.metadatas.merge!(YAML.load_file(f))
     end
+  end
+
+  def posts
+    Post.where(date: date)
   end
 
   private

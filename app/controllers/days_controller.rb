@@ -5,7 +5,7 @@ class DaysController < ApplicationController
   # GET /days
   # GET /days.json
   def index
-    @days = Day.all.order('date DESC')
+    @days = Day.all
   end
 
   # GET /days/1
@@ -63,9 +63,6 @@ class DaysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_day
       @day = Day.find(params[:id])
-    end
-
-    def mytype(klass)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

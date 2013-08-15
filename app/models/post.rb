@@ -1,11 +1,16 @@
-class Post < ActiveRecord::Base
-  belongs_to :day
+class Post
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Slug
 
-  def date
-    day.try(:date)
-  end
+  field :title, type: String
+  slug :title, history: true
+  field :body, type: String
+  field :date, type: Date
 
-  def date=(value)
-    self.day = Day.find_or_create_by(date: value)
+  index({ date: 1 })
+
+  def day
+    Day.find_or_create_by(date: date)
   end
 end

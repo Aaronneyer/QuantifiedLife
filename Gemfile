@@ -9,12 +9,15 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'figaro'
 gem 'haml-rails'
-gem 'devise'
+gem 'devise', github: 'plataformatec/devise'
 gem 'thin'
 gem 'angularjs-rails'
 gem 'bootstrap_form'
 gem 'pry-rails'
 gem 'hashie'
+gem 'mongoid', github: 'mongoid/mongoid'
+gem 'mongoid_slug'
+gem 'sqlite3'
 
 group :development do
   gem 'better_errors'
@@ -22,9 +25,4 @@ group :development do
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'pry'
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg'
 end
