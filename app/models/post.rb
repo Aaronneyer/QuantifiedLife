@@ -8,7 +8,7 @@ class Post
   field :body, type: String
   field :date, type: Date
 
-  index({ date: 1 })
+  index({ date: -1 })
 
   def day
     Day.find_or_create_by(date: date)

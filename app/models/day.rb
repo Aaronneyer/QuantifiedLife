@@ -9,7 +9,7 @@ class Day
   field :impact, type: Fixnum
   field :metadatas, type: Hash
 
-  index({ date: 1 }, { unique: true })
+  index({ date: -1 }, { unique: true })
 
   validates :date, presence: true, uniqueness: true
 
