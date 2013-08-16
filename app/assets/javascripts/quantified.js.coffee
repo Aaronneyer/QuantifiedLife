@@ -15,8 +15,8 @@ $(document).on('ready page:load', ->
   $rootScope.form_count += 1
   $scope.form_id = $rootScope.form_count
   $scope.input_name = (field) ->
-    "day[metadata_attributes][#{$scope.form_id}][#{field}]"
+    "day[extra_info_attributes][#{$scope.form_id}][#{field}]"
   $scope.input_id = (field) ->
-    "day_metadata_attributes_#{$scope.form_id}_#{field}"
+    "day_extra_info_attributes_#{$scope.form_id}_#{field}"
 
 )

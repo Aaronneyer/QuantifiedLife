@@ -7,7 +7,7 @@ class Day
   slug :date
   field :summary, type: String
   field :impact, type: Fixnum
-  field :metadatas, type: Hash
+  field :extra_info, type: Hash
 
   index({ date: -1 }, { unique: true })
 
@@ -22,9 +22,13 @@ class Day
     String => :string
   }
 
-  def metadata_attributes
-    self.metadatas ||= {}
-    metadatas.map do |key, value|
+  def posts
+    Post.where(date: date)
+  end
+
+  def extra_info_attributes
+    self.extra_info ||= {}
+    extra_info.map do |key, value|
       Hashie::Mash.new({
         key_name: key,
         type: CLASS_MAP[value.class],
@@ -33,34 +37,21 @@ class Day
     end
   end
 
-  def metadata_attributes=(attributes)
-    self.metadatas = {} unless self.metadatas.is_a?(Hash)
+  def extra_info_attributes=(attributes)
+    self.extra_info = {} unless self.extra_info.is_a?(Hash)
     attributes.each do |attr|
       attr = attr.with_indifferent_access
-      self.metadatas[attr[:key_name].to_s] = typecast(attr[:value], attr[:type])
+      self.extra_info[attr[:key_name].to_s] = typecast(attr[:value], attr[:type])
     end
   end
 
-  def set_defaults
-    self.default_metadata
+  def set_defaults(viewer)
+    self.extra_info ||= viewer.default_extra_info
     self.date ||= Date.yesterday
     self.impact ||= 0
   end
 
-  def default_metadata
-    self.metadatas = {} unless self.metadatas.is_a?(Hash)
-    f = Rails.root.join('config', 'default_metadata.yml')
-    if File.exists? f
-      self.metadatas.merge!(YAML.load_file(f))
-    end
-  end
-
-  def posts
-    Post.where(date: date)
-  end
-
   private
-
 
   def typecast(v, type)
     type = type.try(:to_sym)

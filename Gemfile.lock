@@ -192,6 +192,7 @@ DEPENDENCIES
   jquery-rails
   mongoid!
   mongoid_slug
+  moped
   pry
   pry-rails
   quiet_assets

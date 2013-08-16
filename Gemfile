@@ -14,8 +14,10 @@ gem 'thin'
 gem 'angularjs-rails'
 gem 'bootstrap_form'
 gem 'pry-rails'
+gem 'pry'
 gem 'hashie'
 gem 'mongoid', github: 'mongoid/mongoid'
+gem 'moped'
 gem 'mongoid_slug'
 
 group :development do
@@ -23,5 +25,4 @@ group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
   gem 'html2haml'
   gem 'quiet_assets'
-  gem 'pry'
 end
