@@ -19,6 +19,8 @@ gem 'hashie'
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'moped'
 gem 'mongoid_slug'
+gem 'filepicker-rails'
+gem 'exifr'
 
 group :development do
   gem 'better_errors'

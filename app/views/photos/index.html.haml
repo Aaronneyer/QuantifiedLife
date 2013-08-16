@@ -1,0 +1,18 @@
+%h1 Listing photos
+
+%table
+  %tr
+    %th Title
+    %th Body
+    %th Day
+    %th
+
+  - @photos.each do |photo|
+    %tr
+      %td= link_to photo.caption, photo
+      %td= link_to photo.filepicker_url, photo.filepicker_url
+      %td= link_to 'Edit', edit_photo_path(photo)
+
+%br
+
+= link_to 'New photo', new_photo_path

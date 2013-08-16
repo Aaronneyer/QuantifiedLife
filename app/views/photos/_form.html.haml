@@ -1,0 +1,11 @@
+= form_for(@photo) do |f|
+  .form-group
+    = f.label :caption
+    = f.text_field :caption
+
+  .form-group
+    = f.label :filepicker_url, "Upload Picture"
+    = f.filepicker_field :filepicker_url, name: 'photo[filepicker_url]',
+      store_location: 'S3', mimetypes: 'image/jpeg'
+
+  = f.submit "Save photo", class: 'btn'

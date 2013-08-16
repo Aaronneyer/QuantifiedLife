@@ -11,6 +11,6 @@ class Post
   index({ date: -1 })
 
   def day
-    Day.find_or_create_by(date: date)
+    Day.where(date: date).first
   end
 end
