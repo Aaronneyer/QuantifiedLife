@@ -6,6 +6,6 @@
   .form-group
     = f.label :filepicker_url, "Upload Picture"
     = f.filepicker_field :filepicker_url, name: 'photo[filepicker_url]',
-      store_location: 'S3', mimetypes: 'image/jpeg', multiple: true
+      store_location: 'S3', mimetypes: 'image/jpeg'
 
   = f.submit "Save photo", class: 'btn'

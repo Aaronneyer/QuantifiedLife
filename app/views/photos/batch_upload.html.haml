@@ -1,0 +1,11 @@
+%h1 Batch Upload Photos
+
+= form_for(:photo, url: multi_create_photos_path) do |f|
+  .form-group
+    = f.label :filepicker_url, "Upload Photos"
+    = f.filepicker_field :filepicker_url, name: 'photo[filepicker_url]',
+      store_location: 'S3', mimetypes: 'image/jpeg', multiple: true
+
+  = f.submit "Save photos", class: 'btn'
+
+= link_to 'Back', photos_path

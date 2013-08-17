@@ -16,20 +16,43 @@ class PhotosController < ApplicationController
   # GET /photos/new
   def new
     @photo = Photo.new
-    @photo.date = Date.today
   end
 
   # GET /photos/1/edit
   def edit
   end
 
+  def batch_upload
+  end
+
+  def multi_create
+    errors = []
+    photos = []
+    photo_params[:filepicker_url].split(',').each do |url|
+      photo = Photo.new(photo_params.merge(filepicker_url: url))
+      if photo.valid?
+        photos << photo
+      else
+        errors << photo.errors
+      end
+    end
+
+    respond_to do |format|
+      if errors.blank?
+        photos.each(&:save!)
+        format.html { redirect_to photos_path, notice: 'photos were successfully created.' }
+        format.json { render action: 'index', status: :created, location: photos_path }
+      else
+        format.html { render action: 'batch_upload' }
+        format.json { render json: errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # photo /photos
   # photo /photos.json
   def create
-    photo_params[:filepicker_url].split(',').each do |url|
-      # Oh god this is so terrible.
-      @photo = Photo.create(photo_params.merge(filepicker_url: url))
-    end
+    @photo = Photo.new(photo_params)
 
     respond_to do |format|
       if @photo.save
