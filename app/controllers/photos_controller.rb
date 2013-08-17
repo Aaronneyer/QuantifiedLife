@@ -26,7 +26,10 @@ class PhotosController < ApplicationController
   # photo /photos
   # photo /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    photo_params[:filepicker_url].split(',').each do |url|
+      # Oh god this is so terrible.
+      @photo = Photo.create(photo_params.merge(filepicker_url: url))
+    end
 
     respond_to do |format|
       if @photo.save
