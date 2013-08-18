@@ -10,5 +10,12 @@ QuantifiedLife::Application.routes.draw do
 
   resources :days, only: [:index, :show, :edit, :update, :new, :create]
 
+  resources :auth, only: :none do
+    collection do
+      get :github
+      get :github_callback
+    end
+  end
+
   root to: "home#index"
 end

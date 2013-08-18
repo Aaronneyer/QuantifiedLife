@@ -21,6 +21,7 @@ gem 'moped'
 gem 'mongoid_slug'
 gem 'filepicker-rails'
 gem 'exifr'
+gem 'github_api'
 
 group :development do
   gem 'better_errors'

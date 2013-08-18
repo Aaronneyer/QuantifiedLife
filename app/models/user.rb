@@ -13,6 +13,7 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip, type: String
   field :default_extra_info, type: Hash
+  field :github_token, type: String
 
   index({ email: 1 }, { unique: true })
   index({ reset_password_token: 1 }, { unique: true })
