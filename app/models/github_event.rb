@@ -9,4 +9,10 @@ class GithubEvent
       "Commented on #{payload['comment']['commit_id']} with #{payload['comment']['body']}"
     end
   end
+
+  class << self
+    def fetch_events
+      User.each(&:fetch_events)
+    end
+  end
 end

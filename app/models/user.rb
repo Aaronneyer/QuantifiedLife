@@ -19,4 +19,24 @@ class User
   index({ reset_password_token: 1 }, { unique: true })
 
   devise :database_authenticatable, :rememberable, :trackable
+
+  def fetch_events
+    if github_token
+      gh = Github.new(oauth_token: user.github_token)
+      gh_user = gh.users.get
+      done = false
+      gh.activity.events.performed(gh_user.login).each_page do |page|
+        page.each do |event|
+          event.merge!(user_id: id)
+          if GithubEvent.where(id: event.id).exists?
+            done = true
+            break
+          else
+            GithubEvent.create!(ActionController::Parameters.new(event).permit!)
+          end
+        end
+        break if done
+      end
+    end
+  end
 end
