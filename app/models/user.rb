@@ -14,6 +14,7 @@ class User
   field :last_sign_in_ip, type: String
   field :default_extra_info, type: Hash
   field :github_token, type: String
+  has_many :github_events
 
   index({ email: 1 }, { unique: true })
   index({ reset_password_token: 1 }, { unique: true })
@@ -22,13 +23,13 @@ class User
 
   def fetch_events
     if github_token
-      gh = Github.new(oauth_token: user.github_token)
+      gh = Github.new(oauth_token: github_token)
       gh_user = gh.users.get
       done = false
       gh.activity.events.performed(gh_user.login).each_page do |page|
         page.each do |event|
           event.merge!(user_id: id)
-          if GithubEvent.where(id: event.id).exists?
+          if GithubEvent.where(id: event.id, user_id: id).exists?
             done = true
             break
           else
@@ -38,5 +39,9 @@ class User
         break if done
       end
     end
+  end
+
+  def self.fetch_events(user_id)
+    User.find(user_id).fetch_events
   end
 end

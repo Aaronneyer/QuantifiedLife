@@ -23,6 +23,8 @@ gem 'filepicker-rails'
 gem 'exifr'
 gem 'github_api'
 gem 'sidekiq'
+gem 'slim'
+gem 'sinatra', require: nil
 
 group :development do
   gem 'better_errors'

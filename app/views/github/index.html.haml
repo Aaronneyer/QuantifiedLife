@@ -1,0 +1,7 @@
+= link_to "Authenticate", new_github_path
+\|
+= link_to "Backfill", backfill_github_index_path
+- if current_user.github_token
+  %ul
+    - @github_events.each do |event|
+      %li= event.info_string

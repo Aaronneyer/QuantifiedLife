@@ -1,4 +1,6 @@
 QuantifiedLife::Application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   devise_for :users
   resources :posts
   resources :photos do
@@ -10,10 +12,10 @@ QuantifiedLife::Application.routes.draw do
 
   resources :days, only: [:index, :show, :edit, :update, :new, :create]
 
-  resources :auth, only: :none do
+  resources :github, only: [:index, :new] do
     collection do
-      get :github
-      get :github_callback
+      get :callback
+      get :backfill
     end
   end
 
