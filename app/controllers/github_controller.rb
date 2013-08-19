@@ -3,13 +3,14 @@ class GithubController < ApplicationController
   before_action :setup, only: %i[new callback]
 
   def index
-    @github_events = GithubEvent.where(user_id: current_user.id)
+    @events = GithubEvent.where(user_id: current_user.id)
   end
 
   def backfill
     # TODO: Replace this with one that actually backfills, potentially with
     # Bigquery
-    User.delay.fetch_events(current_user.id)
+    GithubEvent.delay.backfill(current_user.id.to_s)
+    flash[:notice] = "We've started filling in your Github Data. Please be patient."
     redirect_to github_index_path
   end
 

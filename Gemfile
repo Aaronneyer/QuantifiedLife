@@ -25,6 +25,7 @@ gem 'github_api'
 gem 'sidekiq'
 gem 'slim'
 gem 'sinatra', require: nil
+gem 'kiqstand', github: 'mongoid/kiqstand'
 
 group :development do
   gem 'better_errors'

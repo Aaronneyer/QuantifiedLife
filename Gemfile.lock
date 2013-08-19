@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/mongoid/kiqstand.git
+  revision: fdd5ea62293707fe044180a220670b0142314d04
+  specs:
+    kiqstand (1.2.0)
+      mongoid (~> 4.0)
+      moped (~> 1.4)
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 29672adc7ccbe51c7dce49934432d391a4a0b13a
   specs:
@@ -246,6 +254,7 @@ DEPENDENCIES
   html2haml
   jbuilder (~> 1.2)
   jquery-rails
+  kiqstand!
   mongoid!
   mongoid_slug
   moped
