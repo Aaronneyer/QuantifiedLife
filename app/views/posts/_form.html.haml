@@ -8,6 +8,14 @@
     = f.text_area :body
 
   .form-group
+    = f.label :impact
+    = f.number_field :impact
+
+  .form-group
+    = f.label :tags
+    = f.text_field :tags
+
+  .form-group
     = f.label :date
     = f.date_field :date
 
