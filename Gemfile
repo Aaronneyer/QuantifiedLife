@@ -26,6 +26,8 @@ gem 'sidekiq'
 gem 'slim'
 gem 'sinatra', require: nil
 gem 'kiqstand', github: 'mongoid/kiqstand'
+gem 'redcarpet'
+gem 'pygments.rb'
 
 group :development do
   gem 'better_errors'

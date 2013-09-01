@@ -5,7 +5,8 @@
 
   .form-group
     = f.label :body
-    = f.text_area :body
+    = f.text_area :body, style: 'display: none;'
+    #epiceditor
 
   .form-group
     = f.label :impact
@@ -21,3 +22,8 @@
 
   = f.submit "Save Post", class: 'btn'
 
+:javascript
+  var editor = new EpicEditor({
+    textarea: 'post_body',
+    basePath: '/epiceditor'
+  }).load();
