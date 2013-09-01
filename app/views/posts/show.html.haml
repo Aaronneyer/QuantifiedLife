@@ -2,6 +2,7 @@
 
 %h2= @post.title
 %p= link_to @post.date, @post.day
+%p= @post.tag_string
 .post-body
   = markdown @post.body
 

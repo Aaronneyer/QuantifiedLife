@@ -12,11 +12,12 @@ class Post
 
   index({ date: -1 })
 
-  def tags=(new_tags)
-    if new_tags.is_a?(String)
-      new_tags = new_tags.split
-    end
-    super(new_tags)
+  def tag_string
+    tags.join(' ')
+  end
+
+  def tag_string=(new_tags)
+    self.tags = new_tags.split
   end
 
   def day
