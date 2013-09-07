@@ -15,8 +15,11 @@ class User
   field :default_extra_info, type: Hash
   field :github_token, type: String
   field :github_private, type: Boolean, default: false
+  field :dropbox_token, type: String
+  field :dropbox_uid, type: String
   field :admin, type: Boolean
   has_many :github_events
+  has_many :photos
 
   index({ email: 1 }, { unique: true })
   index({ reset_password_token: 1 }, { unique: true })

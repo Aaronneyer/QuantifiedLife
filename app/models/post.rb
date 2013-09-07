@@ -10,6 +10,8 @@ class Post
   field :impact, type: Fixnum
   field :tags, type: Array, default: []
 
+  belongs_to :user
+
   index({ date: -1 })
 
   def tag_string

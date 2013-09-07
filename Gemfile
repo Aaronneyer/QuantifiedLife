@@ -22,6 +22,8 @@ gem 'mongoid_slug'
 gem 'filepicker-rails'
 gem 'exifr'
 gem 'github_api'
+gem 'dropbox-sdk', require: 'dropbox_sdk'
+gem 'httparty'
 gem 'sidekiq'
 gem 'slim'
 gem 'sinatra', require: nil

@@ -21,5 +21,11 @@ QuantifiedLife::Application.routes.draw do
     end
   end
 
+  resources :dropbox, only: [:index, :new] do
+    collection do
+      get :callback
+    end
+  end
+
   root to: "home#index"
 end
