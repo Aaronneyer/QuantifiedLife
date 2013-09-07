@@ -4,11 +4,15 @@ class Photo
   include Mongoid::Slug
 
   field :caption, type: String
-  slug :caption
   field :filepicker_url, type: String
+  field :filename
   field :date, type: Date
   field :dropbox_path
   field :exif, type: Hash
+
+  slug index: true do |doc|
+    [doc.filename, doc.filepicker_url].reject.first.to_url
+  end
 
   belongs_to :user, index: true
 
@@ -17,7 +21,7 @@ class Photo
   validates :filepicker_url, presence: true
 
   before_create :get_exif, :set_date
-
+ 
   def get_exif
     require 'open-uri'
     self.exif = {}
@@ -73,7 +77,10 @@ class Photo
         if !user.photos.where(dropbox_path: file['path']).any?
           media = db.media(file['path'])
           result = fp.store({url: media['url']})
-          Photo.create!(filepicker_url: result['url'], dropbox_path: file['path'])
+          Photo.create!(filepicker_url: result['url'],
+                        dropbox_path: file['path'],
+                        filename: File.basename(file['path']),
+                        user_id: user_id)
         end
       end
     end
