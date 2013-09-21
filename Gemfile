@@ -21,8 +21,6 @@ gem 'moped'
 gem 'mongoid_slug'
 gem 'filepicker-rails'
 gem 'exifr'
-gem 'github_api'
-gem 'dropbox-sdk', require: 'dropbox_sdk'
 gem 'httparty'
 gem 'sidekiq'
 gem 'slim'
@@ -30,6 +28,10 @@ gem 'sinatra', require: nil
 gem 'kiqstand', github: 'mongoid/kiqstand'
 gem 'redcarpet'
 gem 'pygments.rb'
+
+gem 'github_api'
+gem 'dropbox-sdk', require: 'dropbox_sdk'
+gem 'omniauth-moves'
 
 group :development do
   gem 'better_errors'
