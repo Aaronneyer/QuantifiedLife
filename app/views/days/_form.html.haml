@@ -6,10 +6,13 @@
       = f.date_field :date
 
   .form-group
+    = f.label :headline
+    = f.text_field :headline
+
+  .form-group
     = f.label :summary
-    .input-group
-      = f.text_area :summary, class: 'form-control', 'ng-model' => 'summary', 'ng-init' => "summary='#{j @day.summary}'"
-      %span.input-group-addon {{summary.length}}/500
+    = f.text_area :summary, style: 'display: none;'
+    #epiceditor
 
   .form-group
     = f.label :impact
@@ -35,3 +38,9 @@
 
 
   = f.submit 'Record Day', class: 'btn'
+
+:javascript
+  var editor = new EpicEditor({
+    textarea: 'day_summary',
+    basePath: '/epiceditor'
+  }).load();

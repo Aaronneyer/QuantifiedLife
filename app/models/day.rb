@@ -5,6 +5,7 @@ class Day
 
   field :date, type: Date
   slug :date
+  field :headline, type: String
   field :summary, type: String
   field :impact, type: Fixnum
   field :extra_info, type: Hash
