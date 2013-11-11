@@ -3,9 +3,14 @@
 %p
   %b Date:
   = @day.date
+
+%p
+  %b Headline:
+  = @day.headline
+
 %p
   %b Summary:
-  = @day.summary
+  = markdown @day.summary
 
 %p
   %b Posts
