@@ -7,7 +7,9 @@
 
   .form-group
     = f.label :headline
-    = f.text_field :headline
+    .input-group
+      = f.text_field :headline, class: 'form-control', 'ng-model' => 'headline', 'ng-init' => "headline='#{j @day.headline}'"
+      %span.input-group-addon {{headline.length}}/100
 
   .form-group
     = f.label :summary
