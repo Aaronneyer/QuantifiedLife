@@ -60,6 +60,7 @@ class GithubEvent
   class << self
     def fetch_all_events
       User.each{ |u| fetch_events(u.id) }
+      Github.delay_for(1.day).fetch_all_events
     end
 
     def fetch_events(user_id)
