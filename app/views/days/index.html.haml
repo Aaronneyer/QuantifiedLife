@@ -3,14 +3,14 @@
 %table.table.table-condensed
   %tr
     %th Date
-    %th Summary
-    %th Posts
+    %th Headline
+    %th Impact
 
   - @days.each do |day|
     %tr{class: impact_class(day)}
       %td{nowrap: true}= link_to day.date, day
-      %td= day.summary
-      %td= day.posts.count
+      %td= day.headline
+      %td= day.impact
 
 %br
 
