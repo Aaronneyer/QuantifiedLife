@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require angular
 //= require epiceditor
+//= require bootstrap
 //= require_tree .
