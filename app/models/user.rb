@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include ExtraInfoAttributes
 
   field :email, type: String, default: ''
   slug :email, history: true
@@ -12,7 +13,8 @@ class User
   field :last_sign_in_at, type: DateTime
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip, type: String
-  field :default_extra_info, type: Hash
+
+  field :extra_info, type: Hash
   field :github_token, type: String
   field :github_private, type: Boolean, default: false
   field :dropbox_token, type: String
@@ -20,6 +22,8 @@ class User
   field :admin, type: Boolean
   has_many :github_events
   has_many :photos
+  has_many :posts
+  has_many :days
 
   index({ email: 1 }, { unique: true })
   index({ reset_password_token: 1 }, { unique: true })

@@ -3,7 +3,7 @@ class GithubController < ApplicationController
   before_action :setup, only: %i[new callback]
 
   def index
-    @events = GithubEvent.where(user_id: current_user.id)
+    @events = GithubEvent.where(user_id: current_user.id).desc(:created_at)
   end
 
   def backfill

@@ -4,8 +4,17 @@ class GithubEvent
   include ActionView::Helpers
 
   belongs_to :user
+  field :created_at, type: Time
+  field :type, type: String
+  field :payload, type: Hash
+  field :repo, type: Hash
+  field :actor, type: Hash
+  field :org, type: Hash
+  field :id, type: String
+  field :public, type: Boolean
 
-  index({ user_id: 1 })
+  index({ user_id: 1, created_at: 1 })
+  index({ created_at: 1 })
 
   # TODO: These should probably be partials that I render for the timeline.
   # OH MY GOD THERE ARE SO MANY STRINGS
@@ -58,6 +67,7 @@ class GithubEvent
   end
 
   class << self
+    # This job is called asynchronously every day
     def fetch_all_events
       User.each{ |u| fetch_events(u.id) }
       Github.delay_for(1.day).fetch_all_events
