@@ -3,10 +3,14 @@
     = link_to "QuantifiedLife", root_path, class: 'navbar-brand'
   - if user_signed_in?
     %ul.nav.navbar-nav
-      %li= link_to "My Day", new_day_path, class: 'navbar-link'
-      %li= link_to "My Days", days_path, class: 'navbar-link'
-      %li= link_to "New Post", new_post_path, class: 'navbar-link'
+      %li= link_to "Days", days_path, class: 'navbar-link'
+      %li= link_to "+", new_day_path, class: 'navbar-link'
       %li= link_to "Posts", posts_path, class: 'navbar-link'
+      %li= link_to "+", new_post_path, class: 'navbar-link'
     %p.navbar-text.pull-right
-      Logged in as #{current_user.email}
+      Logged in as
+      = link_to current_user.email, user_path(current_user)
       = link_to 'Logout', destroy_user_session_path, method: :delete
+  - else
+    %p.navbar-text.pull-right
+      =link_to "Sign In", new_user_session_path
