@@ -1,0 +1,9 @@
+%h1 Users
+
+%table.table.table-condensed
+  %tr
+    %th Email
+
+  - @users.each do |user|
+    %tr
+      %td= link_to user.email, user

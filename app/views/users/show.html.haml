@@ -1,0 +1,11 @@
+%p#notice= notice
+
+%p
+  %b Email
+  = @user.email
+
+%p
+  %b Extra Info:
+  = @user.extra_info
+
+= link_to 'Edit', edit_user_path(@user)

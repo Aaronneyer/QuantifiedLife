@@ -5,6 +5,11 @@ $(document).on('ready page:load', ->
 )
 
 @app.controller('DayCtrl', ($scope) ->
+  $scope.field_name = 'day';
+)
+
+@app.controller('UserCtrl', ($scope) ->
+  $scope.field_name = 'user';
 )
 
 @app.controller('MetadataCtrl', ($scope, $rootScope) ->
@@ -15,8 +20,8 @@ $(document).on('ready page:load', ->
   $rootScope.form_count += 1
   $scope.form_id = $rootScope.form_count
   $scope.input_name = (field) ->
-    "day[extra_info_attributes][#{$scope.form_id}][#{field}]"
+    "#{$scope.field_name}[extra_info_attributes][#{$scope.form_id}][#{field}]"
   $scope.input_id = (field) ->
-    "day_extra_info_attributes_#{$scope.form_id}_#{field}"
+    "#{$scope.field_name}_extra_info_attributes_#{$scope.form_id}_#{field}"
 
 )

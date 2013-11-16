@@ -5,6 +5,7 @@ QuantifiedLife::Application.routes.draw do
   end
   devise_for :users
   resources :posts
+
   resources :photos do
     collection do
       get :batch_upload
@@ -13,6 +14,8 @@ QuantifiedLife::Application.routes.draw do
   end
 
   resources :days, only: [:index, :show, :edit, :update, :new, :create]
+
+  resources :users, only: [:index, :show, :edit, :update]
 
   resources :github, only: [:index, :new] do
     collection do
