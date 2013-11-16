@@ -25,17 +25,18 @@
       Metadata
       %button{type: 'button', class: 'btn', 'ng-click' => 'metadata.push({})'} Add metadata
     .form-group{'ng-controller' => 'MDCtrl', 'ng-repeat' => 'md in metadata'}
-      %label{for: "{{input_id('key_name')}}"} Key
       %input{'ng-model' => "md.key_name", id: "{{input_id('key_name')}}", name: "{{input_name('key_name')}}"}
-      %br
-      %label{for: "{{input_id('type')}}"} Type
+      \ =>
       = select_tag(:type, options_for_select([:integer, :string, :boolean]),
         name: "{{input_name('type')}}", 'ng-model' => 'md.type', id: "{{input_id('type')}}")
-      %br
-      %label{for: "{{input_id('value')}}"} Value
+      \ =>
       %span{'ng-switch' => '', 'on' => 'md.type'}
         - {'text' => 'string', 'number' => 'integer', 'checkbox' => 'boolean'}.each do |type, switch|
-          %input{name: "{{input_name('value')}}", id: "{{input_id('value')}}", 'ng-model' => 'md.value', type: type, 'ng-switch-when' => switch}
+          %input{name: "{{input_name('value')}}", id: "{{input_id('value')}}", 
+            'ng-model' => 'md.value', type: type, 'ng-switch-when' => switch}
+      %button{type: 'button', class: 'btn btn-default btn-lg', 'ng-click' => 'delete(md)'}
+        %span{class: 'glyphicon glyphichon-remove'}
+        X
 
 
 

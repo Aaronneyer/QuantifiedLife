@@ -24,4 +24,7 @@ $(document).on('ready page:load', ->
   $scope.input_id = (field) ->
     "#{$scope.field_name}_extra_info_attributes_#{$scope.form_id}_#{field}"
 
+  $scope.delete = (md) ->
+    $scope.metadata.splice($scope.metadata.indexOf(md), 1)
+
 )

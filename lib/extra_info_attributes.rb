@@ -9,7 +9,7 @@ module ExtraInfoAttributes
   }
 
   def extra_info_attributes=(attributes)
-    self.extra_info = {} unless self.extra_info.is_a?(Hash)
+    self.extra_info = {}
     attributes.each do |attr|
       attr = attr.with_indifferent_access
       self.extra_info[attr[:key_name].to_s] = typecast(attr[:value], attr[:type])
