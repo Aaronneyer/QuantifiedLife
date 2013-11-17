@@ -10,9 +10,30 @@
 
 %p
   %b Github
+  %i.fa.fa-github
   - if @user.github_token
-    Authenticated with Github!
+    = link_to "View Github Events", github_index_path(user_id: @user.id)
   - else
     = github_url
+
+%p
+  %b Dropbox
+  %i.fa.fa-dropbox
+  - if @user.dropbox_token
+    = link_to "View Photos", photos_path(user_id: @user.id)
+  - else
+    = dropbox_url
+    
+
+%p
+  %b Days
+  %i.fa.fa-calendar
+  = link_to "View Days", days_path(user_id: @user.id)
+
+%p
+  %b Posts
+  %i.fa.fa-book
+  = link_to "View Posts", users_path(user_id: @user.id)
+
 
 = link_to 'Edit', edit_user_path(@user)

@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_and_check_viewer, only: [:index]
+  before_action :check_viewable, only: [:show]
+  before_action :check_editable, only: [:edit, :update]
 
   # GET /posts
   # GET /posts.json
@@ -63,13 +66,23 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :body, :date, :impact, :tag_string)
+  def post_params
+    params.require(:post).permit(:title, :body, :date, :impact, :tag_string)
+  end
+
+  def check_viewable
+    unless current_user.can_view?(@post.user)
+      redirect_to root_path
     end
+  end
+
+  def check_editable
+    unless current_user.can_edit?(@post.user)
+      redirect_to root_path
+    end
+  end
 end

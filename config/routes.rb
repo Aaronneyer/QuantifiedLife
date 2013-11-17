@@ -24,7 +24,7 @@ QuantifiedLife::Application.routes.draw do
     end
   end
 
-  resources :dropbox, only: [:index, :new] do
+  resources :dropbox, only: [] do
     collection do
       get :callback
     end

@@ -29,4 +29,12 @@ class User
   index({ reset_password_token: 1 }, { unique: true })
 
   devise :database_authenticatable, :rememberable, :trackable
+
+  def can_view?(user)
+    admin? || user == self
+  end
+
+  def can_edit?(user)
+    admin? || user == self
+  end
 end

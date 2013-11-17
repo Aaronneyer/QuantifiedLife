@@ -9,9 +9,9 @@
     - if user_signed_in?
       %ul.nav.navbar-nav
         %li= link_to "Days", days_path
-        %li= link_to "+", new_day_path
+        %li= link_to "", new_day_path, class: 'ql-navbar-plus fa fa-plus'
         %li= link_to "Posts", posts_path
-        %li= link_to "+", new_post_path
+        %li= link_to "", new_post_path, class: 'ql-navbar-plus fa fa-plus'
     %ul.nav.navbar-nav.navbar-right
       %li.dropdown
         - if user_signed_in?

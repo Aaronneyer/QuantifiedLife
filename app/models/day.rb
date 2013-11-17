@@ -22,6 +22,7 @@ class Day
   end
 
   def set_defaults(viewer)
+    self.user_id ||= viewer.id
     self.extra_info ||= viewer.extra_info
     self.date ||= Date.yesterday
     self.impact ||= 0

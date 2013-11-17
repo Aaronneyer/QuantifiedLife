@@ -1,6 +1,9 @@
 class DaysController < ApplicationController
   before_action :set_day, only: [:show, :edit, :update]
   before_action :authenticate_user!
+  before_action :set_and_check_viewer, only: [:index]
+  before_action :check_viewable, only: [:show]
+  before_action :check_editable, only: [:edit, :update]
 
   # GET /days
   # GET /days.json
@@ -60,13 +63,26 @@ class DaysController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_day
-      @day = Day.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_day
+    @day = Day.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def day_params
-      params.require(:day).permit(:date, :headline, :summary, :impact, :post_id, extra_info_attributes: [:key_name, :type, :value])
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def day_params
+    params.require(:day).permit(:date, :headline, :summary, :impact, :post_id,
+                                extra_info_attributes: [:key_name, :type, :value])
+  end
+
+  def check_viewable
+    unless current_user.can_view?(@day.user)
+      redirect_to root_path
     end
+  end
+
+  def check_editable
+    unless current_user.can_edit?(@day.user)
+      redirect_to root_path
+    end
+  end
 end

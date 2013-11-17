@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :authenticate_user!
   before_action :check_correct_user, except: [:index]
+  before_action :check_viewable, only: [:show]
+  before_action :check_editable, only: [:edit, :update]
 
   def index
     @users = User.all.desc(:date)
@@ -29,15 +31,28 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def user_params
-      params.require(:user).permit(extra_info_attributes: [:key_name, :type, :value])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def check_correct_user
-      redirect_to root_path unless @user == current_user || current_user.admin?
+  def user_params
+    params.require(:user).permit(extra_info_attributes: [:key_name, :type, :value])
+  end
+
+  def check_correct_user
+    redirect_to root_path unless @user == current_user || current_user.admin?
+  end
+
+  def check_viewable
+    unless current_user.can_view?(@user)
+      redirect_to root_path
     end
+  end
+
+  def check_editable
+    unless current_user.can_edit?(@user)
+      redirect_to root_path
+    end
+  end
 end
