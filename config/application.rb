@@ -11,7 +11,7 @@ Bundler.require(:default, Rails.env)
 
 module QuantifiedLife
   class Application < Rails::Application
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.autoload_paths << Rails.root.join('lib')
     config.filepicker_rails.api_key = ENV['FILEPICKER_API_KEY']
     # Settings in config/environments/* take precedence over those specified here.

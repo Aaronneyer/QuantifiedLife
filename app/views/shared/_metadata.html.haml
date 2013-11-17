@@ -12,6 +12,4 @@
       - {'text' => 'string', 'number' => 'integer', 'checkbox' => 'boolean'}.each do |type, switch|
         %input{name: "{{input_name('value')}}", id: "{{input_id('value')}}",
           'ng-model' => 'md.value', type: type, 'ng-switch-when' => switch}
-    %button{type: 'button', class: 'btn btn-default btn-lg', 'ng-click' => 'delete(md)'}
-      %span{class: 'glyphicon glyphichon-remove'}
-      X
+    %a{href: '#', class: 'fa fa-times', 'ng-click' => 'delete(md)'}

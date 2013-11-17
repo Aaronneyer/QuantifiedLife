@@ -5,7 +5,14 @@
   = @user.email
 
 %p
-  %b Extra Info:
+  %b Default Metadata:
   = @user.extra_info
+
+%p
+  %b Github
+  - if @user.github_token
+    Authenticated with Github!
+  - else
+    = github_url
 
 = link_to 'Edit', edit_user_path(@user)

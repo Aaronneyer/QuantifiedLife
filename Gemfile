@@ -27,6 +27,7 @@ gem 'sinatra', require: nil
 gem 'kiqstand', github: 'mongoid/kiqstand'
 gem 'redcarpet'
 gem 'pygments.rb'
+gem 'font-awesome-rails'
 
 gem 'github_api'
 gem 'dropbox-sdk', require: 'dropbox_sdk'

@@ -1,6 +1,5 @@
 class GithubController < ApplicationController
   before_action :authenticate_user!
-  before_action :setup, only: %i[new callback]
 
   def index
     @events = GithubEvent.where(user_id: current_user.id).desc(:created_at)
@@ -14,19 +13,11 @@ class GithubController < ApplicationController
     redirect_to github_index_path
   end
 
-  def new
-  end
-
   def callback
+    @github = Github.new(client_id: ENV['GITHUB_CLIENT_ID'],
+                         client_secret: ENV['GITHUB_CLIENT_SECRET'])
     current_user.github_token = @github.get_token(params[:code]).token
     current_user.save
     redirect_to github_index_path
-  end
-
-  private
-
-  def setup
-    @github = Github.new(client_id: ENV['GITHUB_CLIENT_ID'],
-                         client_secret: ENV['GITHUB_CLIENT_SECRET'])
   end
 end

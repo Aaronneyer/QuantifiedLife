@@ -90,6 +90,8 @@ GEM
       rails (>= 3, < 5)
     filepicker-rails (1.0.0)
       rails (>= 3.2)
+    font-awesome-rails (4.0.3.0)
+      railties (>= 3.2, < 5.0)
     github_api (0.10.2)
       addressable
       faraday (~> 0.8.7)
@@ -265,6 +267,7 @@ DEPENDENCIES
   exifr
   figaro
   filepicker-rails
+  font-awesome-rails
   github_api
   haml-rails
   hashie
