@@ -16,6 +16,14 @@ class GithubEvent
   index({ user_id: 1, created_at: 1 })
   index({ created_at: 1 })
 
+  VALID_TYPES = %w[
+    CommitCommentEvent CreateEvent DeleteEvent DownloadEvent FollowEvent
+    ForkEvent ForkApplyEvent GistEvent GollumEvent IssueCommentEvent IssuesEvent
+    MemberEvent PublicEvent PullRequestEvent PullRequestReviewCommentEvent
+    PushEvent ReleaseEvent StatusEvent TeamAddEvent WatchEvent
+  ]
+  before_create :set_type
+
   # TODO: These should probably be partials that I render for the timeline.
   # OH MY GOD THERE ARE SO MANY STRINGS
   def info_string
@@ -75,35 +83,34 @@ class GithubEvent
 
     def fetch_events(user_id)
       user = User.find(user_id)
-      if user.github_token
-        gh = Github.new(oauth_token: user.github_token)
-        done = false
-        gh.activity.events.performed(gh.users.get.login, public: user.github_private).each_page do |page|
-          page.each do |event|
-            update_params = ActionController::Parameters.new(event.merge(user_id: user.id)).permit!
-            if GithubEvent.where(id: event.id, user_id: user.id).exists?
-              done = true
-              break
-            else
-              GithubEvent.create!(update_params)
-            end
+      return unless user.github_token
+      gh = Github.new(oauth_token: user.github_token)
+      done = false
+      gh.activity.events.performed(gh.users.get.login, public: user.github_private).each_page do |page|
+        page.each do |event|
+          if GithubEvent.where(id: event.id, user_id: user.id).exists?
+            done = true
+            break
+          else
+            # ActiveModel lets through a hash but not a hashie.
+            GithubEvent.create!(event.merge(user_id: user.id).to_hash)
           end
-          break if done
         end
+        break if done
       end
     end
 
     def backfill(user_id)
       #TODO: Some Bigquery stuff here for more through public backfill
-      user = User.find(user_id)
-      gh = Github.new(oauth_token: user.github_token)
-      gh.activity.events.performed(gh.users.get.login, public: user.github_private).each_page do |page|
-        page.each do |event|
-          update_params = ActionController::Parameters.new(event.merge(user_id: user.id)).permit!
-          ge = GithubEvent.find_or_initialize_by(id: event.id, user_id: user.id)
-          ge.update_attributes(update_params)
-        end
-      end
+      fetch_events(user_id)
+    end
+  end
+
+  private
+
+  def set_type
+    if type.in? VALID_TYPES
+      self['_type'] = "GithubEvent::#{type}"
     end
   end
 end
