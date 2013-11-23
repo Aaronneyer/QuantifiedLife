@@ -25,13 +25,13 @@ class GithubEvent
   before_create :set_type
 
   def info_string
-    "Unknown Github Event Type"
+    'Unknown Github Event Type'
   end
 
   class << self
     # This job is called asynchronously every day
     def fetch_all_events
-      User.each{ |u| fetch_events(u.id) }
+      User.each { |u| fetch_events(u.id) }
       Github.delay_for(1.day).fetch_all_events
     end
 
@@ -55,7 +55,7 @@ class GithubEvent
     end
 
     def backfill(user_id)
-      #TODO: Some Bigquery stuff here for more through public backfill
+      # TODO: Some Bigquery stuff here for more through public backfill
       fetch_events(user_id)
     end
   end

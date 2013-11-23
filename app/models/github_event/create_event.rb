@@ -1,5 +1,5 @@
 class GithubEvent::CreateEvent < GithubEvent
-  field :payload, type: Hash, default: {ref_type: '', ref: '', master_branch: '', description: ''}
+  field :payload, type: Hash, default: { ref_type: '', ref: '', master_branch: '', description: '' }
 
   def info_string
     case payload['ref_type']
