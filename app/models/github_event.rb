@@ -24,54 +24,8 @@ class GithubEvent
   ]
   before_create :set_type
 
-  # TODO: These should probably be partials that I render for the timeline.
-  # OH MY GOD THERE ARE SO MANY STRINGS
   def info_string
-    case type
-    when 'CommitCommentEvent'
-      "Commented on #{payload['comment']['commit_id']} with #{payload['comment']['body']}"
-    when 'CreateEvent'
-      case payload['ref_type']
-      when 'repository'
-        "Created #{repo['name']} repository"
-      when 'branch'
-        "Created branch #{payload['ref']} in #{repo['name']}"
-      when 'tag'
-        "Created tag #{payload['ref']} in #{repo['name']}"
-      end
-    when 'DeleteEvent'
-      "Deleted #{payload['ref_type']} #{payload['ref']} in #{repo['name']}"
-    when 'DownloadEvent'
-      "You downloaded something"
-    when 'FollowEvent'
-      "You followed #{payload['target']['login']}"
-    when 'ForkEvent'
-      "You forked #{repo['name']} to #{payload['forkee']['full_name']}"
-    when 'ForkApplyEvent'
-      "You forkapplied something!"
-    when 'GistEvent'
-      "You gisted something!"
-    when 'GollumEvent'
-      "You gollumed! (Should iterate over the pages)"
-    when 'IssueCommentEvent'
-      "You commented on issue #{payload['issue']['url']}"
-    when 'IssuesEvent'
-      "You #{payload['action']} the issue #{payload['issue']['url']}"
-    when 'MemberEvent'
-      "You added #{payload['member']['login']} to #{repo['name']}"
-    when 'PublicEvent'
-      "You open sourced #{repo['name']}!"
-    when 'PullRequestEvent'
-      "You #{payload['action']} the pull request at #{payload['pull_request']['url']}"
-    when 'PullRequestReviewCommentEvent'
-      "You uhh... that thing..."
-    when 'PushEvent'
-      "You pushed #{pluralize(payload['commits'].count, "commit")} to #{repo['name']}"
-    when 'TeamAddEvent'
-      "Team add thing"
-    when 'WatchEvent'
-      "You #{payload['action']} watching #{repo['name']}"
-    end
+    "Unknown Github Event Type"
   end
 
   class << self
