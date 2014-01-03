@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %p
   %b Email
   = @user.email
@@ -33,7 +31,13 @@
 %p
   %b Posts
   %i.fa.fa-book
-  = link_to "View Posts", users_path(user_id: @user.id)
+  = link_to "View Posts", posts_path(user_id: @user.id)
 
+%p
+  %b Permitted Viewers
+  %ul
+    - @user.permitted_viewers.each do |viewer|
+      %li= User.find(viewer).email
 
-= link_to 'Edit', edit_user_path(@user)
+- if current_user.can_edit?(@user)
+  = link_to 'Edit', edit_user_path(@user)

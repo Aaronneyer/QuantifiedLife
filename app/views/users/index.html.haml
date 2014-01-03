@@ -6,4 +6,8 @@
 
   - @users.each do |user|
     %tr
-      %td= link_to user.email, user
+      %td
+        - if current_user.can_view?(user)
+          = link_to user.email, user
+        - else
+          [Anonymous]

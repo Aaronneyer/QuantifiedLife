@@ -8,8 +8,13 @@
   .form-group
     = f.label :headline
     .input-group
-      = f.text_field :headline, class: 'form-control', 'ng-model' => 'headline', 'ng-init' => "headline='#{j @day.headline}'"
-      %span.input-group-addon {{headline.length}}/100
+      = f.text_field :headline, class: 'form-control'
+      %span.input-group-addon#day_headline_length #{@day.headline.length}/100
+
+  :javascript
+    $('#day_headline').on('keydown', function() {
+      $('#day_headline_length').text(this.value.length + "/100");
+    });
 
   .form-group
     = f.label :summary
@@ -21,8 +26,6 @@
     = f.number_field :impact, min: 0, max: 10
 
   = render partial: 'shared/metadata'
-
-
 
   = f.submit 'Record Day', class: 'btn'
 

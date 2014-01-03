@@ -6,10 +6,10 @@ class Day
 
   field :date, type: Date
   slug :date
-  field :headline, type: String
+  field :headline, type: String, default: ''
   field :summary, type: String
   field :impact, type: Fixnum
-  field :extra_info, type: Hash
+  field :extra_info, type: Hash, default: {}
 
   belongs_to :user
 

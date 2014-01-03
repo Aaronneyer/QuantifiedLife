@@ -14,12 +14,13 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip, type: String
 
-  field :extra_info, type: Hash
+  field :extra_info, type: Hash, default: {}
   field :github_token, type: String
   field :github_private, type: Boolean, default: false
   field :dropbox_token, type: String
   field :dropbox_uid, type: String
   field :admin, type: Boolean
+  field :permitted_viewers, type: Array, default: []
   has_many :github_events
   has_many :photos
   has_many :posts
@@ -31,7 +32,7 @@ class User
   devise :database_authenticatable, :rememberable, :trackable
 
   def can_view?(user)
-    admin? || user == self
+    can_edit?(user) || user.permitted_viewers.include?(self.id)
   end
 
   def can_edit?(user)

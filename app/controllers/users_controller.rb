@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :authenticate_user!
-  before_action :check_correct_user, except: [:index]
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update]
 
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:user][:extra_info_attributes] = params[:user][:extra_info_attributes].values
+    params[:user][:extra_info_attributes] = params[:user][:extra_info_attributes].try(:values)
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -40,18 +39,16 @@ class UsersController < ApplicationController
     params.require(:user).permit(extra_info_attributes: [:key_name, :type, :value])
   end
 
-  def check_correct_user
-    redirect_to root_path unless @user == current_user || current_user.admin?
-  end
-
   def check_viewable
     unless current_user.can_view?(@user)
+      flash[:notice] = 'You are not permitted to view this user'
       redirect_to root_path
     end
   end
 
   def check_editable
     unless current_user.can_edit?(@user)
+      flash[:notice] = 'You are not permitted to edit this user'
       redirect_to root_path
     end
   end

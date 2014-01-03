@@ -10,6 +10,7 @@ module ExtraInfoAttributes
 
   def extra_info_attributes=(attributes)
     self.extra_info = {}
+    return if attributes.nil?
     attributes.each do |attr|
       attr = attr.with_indifferent_access
       self.extra_info[attr[:key_name].to_s] = typecast(attr[:value], attr[:type])
