@@ -18,8 +18,7 @@ class DaysController < ApplicationController
 
   # GET /days/new
   def new
-    @day = Day.new
-    @day.set_defaults(current_user)
+    @day = Day.new(user: current_user, start_location: Day.last.try(:end_location))
     @attributes = @day.extra_info_attributes.to_json
   end
 
@@ -33,6 +32,7 @@ class DaysController < ApplicationController
   def create
     params[:day][:extra_info_attributes] = params[:day][:extra_info_attributes].values
     @day = Day.new(day_params)
+    @day.user = current_user
 
     respond_to do |format|
       if @day.save
@@ -70,7 +70,7 @@ class DaysController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def day_params
-    params.require(:day).permit(:date, :headline, :summary, :impact, :post_id,
+    params.require(:day).permit(:date, :headline, :summary, :impact, :start_location, :end_location,
                                 extra_info_attributes: [:key_name, :type, :value])
   end
 

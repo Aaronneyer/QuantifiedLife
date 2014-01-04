@@ -21,6 +21,9 @@ class User
   field :dropbox_uid, type: String
   field :admin, type: Boolean
   field :permitted_viewers, type: Array, default: []
+  #TODO: Perhaps make this a set since I'm calling .include? often, but Sets were being derpy
+  field :locations, type: Array, default: []
+
   has_many :github_events
   has_many :photos
   has_many :posts

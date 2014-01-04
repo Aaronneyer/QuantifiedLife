@@ -21,9 +21,21 @@
     = f.text_area :summary, style: 'display: none;'
     #epiceditor
 
-  .form-group
-    = f.label :impact
-    = f.number_field :impact, min: 0, max: 10
+  .row
+    .col-lg-4
+      .input-group
+        .input-group-button
+          = f.label :start_location
+        = f.text_field :start_location, class: 'ui-widget form-control'
+    .col-lg-4
+      .input-group
+        .input-group-button
+          = f.label :end_location
+        = f.text_field :end_location, class: 'ui-widget form-control'
+    .col-lg-4
+      .input-group
+        = f.label :impact
+        = f.number_field :impact, min: 0, max: 10, class: 'form-control'
 
   = render partial: 'shared/metadata'
 
@@ -34,3 +46,9 @@
     textarea: 'day_summary',
     basePath: '/epiceditor'
   }).load();
+
+  $(function() {
+    $('#day_start_location, #day_end_location').autocomplete({
+      source: #{@day.user.locations.to_json}
+    });
+  });

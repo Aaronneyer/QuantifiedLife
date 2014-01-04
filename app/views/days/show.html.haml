@@ -17,6 +17,10 @@
       %li= link_to post.title, post
 
 %p
+  %b Location
+  #{@day.start_location} => #{@day.end_location}
+
+%p
   %b Impact:
   = @day.impact
 %p
