@@ -4,12 +4,14 @@
   %tr
     %th Date
     %th Headline
+    %th Cities
     %th Impact
 
   - @days.each do |day|
     %tr{class: impact_class(day)}
       %td{nowrap: true}= link_to day.date, day
       %td= day.headline
+      %td #{day.start_location} => #{day.end_location}
       %td= day.impact
 
 %br
