@@ -1,23 +1,25 @@
 module UsersHelper
+  include AuthHelper
+
   def github_url
     if @user == current_user
-      @github ||= Github.new(client_id: ENV['GITHUB_CLIENT_ID'],
-                             client_secret: ENV['GITHUB_CLIENT_SECRET'])
-      link_to("Link Your Github", @github.authorize_url)
+      link_to('Link Your Github', github_client.authorize_url(redirect_uri: redirect_uri('github')))
     else
-      "No Github Linked"
+      'No Github Linked'
     end
   end
 
   def dropbox_url
     if @user == current_user
-      @dropbox ||= DropboxOAuth2Flow.new(ENV['DROPBOX_APP_KEY'],
-                                       ENV['DROPBOX_APP_SECRET'],
-                                       'https://aaron.neyer.io/dropbox/callback',
-                                       session, :_csrf_token)
-      link_to("Link Your Dropbox", @dropbox.start)
+      link_to('Link Your Dropbox', dropbox_client.start)
     else
-      "No Dropbox Linked"
+      'No Dropbox Linked'
     end
+  end
+
+  def moves_url
+    link_to('Link Moves',
+            moves_client.auth_code.authorize_url(scope: 'activity location',
+                                                 redirect_uri: redirect_uri('moves')))
   end
 end

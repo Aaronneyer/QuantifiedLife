@@ -17,24 +17,15 @@ QuantifiedLife::Application.routes.draw do
 
   resources :users, only: [:index, :show, :edit, :update]
 
-  resources :github, only: [:index, :new] do
+  resources :github, only: [:index] do
     collection do
-      get :callback
       get :backfill
     end
   end
 
-  resources :dropbox, only: [] do
-    collection do
-      get :callback
-    end
-  end
-
-  resources :moves, only: [:index, :new] do
-    collection do
-      get :callback
-    end
-  end
+  get '/auth/dropbox/callback' => 'callback#dropbox'
+  get '/auth/github/callback' => 'callback#github'
+  get '/auth/moves/callback' => 'callback#moves'
 
   root to: "home#index"
 end

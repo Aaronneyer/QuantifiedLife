@@ -1,5 +1,3 @@
-= link_to "Authenticate", new_github_path
-\|
 = link_to "Backfill", backfill_github_index_path
 - if current_user.github_token
   %ul= render partial: 'event',  collection: @events

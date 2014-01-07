@@ -21,7 +21,14 @@
     = link_to "View Photos", photos_path(user_id: @user.id)
   - else
     = dropbox_url
-    
+
+%p
+  %b Moves
+  %i.fa.fa-location-arrow
+  - if @user.moves_token
+    = link_to "View Moves", "#"
+  - else
+    = moves_url
 
 %p
   %b Days

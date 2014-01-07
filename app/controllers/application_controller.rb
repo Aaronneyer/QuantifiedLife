@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     end
 
     unless current_user.can_view?(@user)
+      flash[:warning] = 'You do not have permission to view this page'
       redirect_to root_path
     end
   end

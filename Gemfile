@@ -32,7 +32,6 @@ gem 'font-awesome-rails'
 
 gem 'github_api'
 gem 'dropbox-sdk', require: 'dropbox_sdk'
-gem 'omniauth-moves'
 
 group :development do
   gem 'better_errors'

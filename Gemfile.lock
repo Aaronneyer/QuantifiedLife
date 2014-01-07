@@ -153,16 +153,6 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.4)
-      hashie (>= 1.2, < 3)
-      rack
-    omniauth-moves (0.0.1)
-      multi_json (~> 1.0)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
-    omniauth-oauth2 (1.1.1)
-      oauth2 (~> 0.8.0)
-      omniauth (~> 1.0)
     origin (1.1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
@@ -282,7 +272,6 @@ DEPENDENCIES
   mongoid!
   mongoid_slug
   moped
-  omniauth-moves
   pry
   pry-rails
   pygments.rb

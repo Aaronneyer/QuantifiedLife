@@ -14,11 +14,13 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip, type: String
 
-  field :extra_info, type: Hash, default: {}
   field :github_token, type: String
   field :github_private, type: Boolean, default: false
   field :dropbox_token, type: String
   field :dropbox_uid, type: String
+  field :moves_token, type: String
+
+  field :extra_info, type: Hash, default: {}
   field :admin, type: Boolean
   field :permitted_viewers, type: Array, default: []
   #TODO: Perhaps make this a set since I'm calling .include? often, but Sets were being derpy
