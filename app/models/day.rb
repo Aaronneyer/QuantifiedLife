@@ -44,6 +44,7 @@ class Day
   end
 
   def moves_places
+    return [] unless moves_storyline['segments']
     moves_storyline['segments'].select{ |segment| segment['type'] == 'place' }.
       map{ |segment| segment['place']['name'] }.compact
   end
