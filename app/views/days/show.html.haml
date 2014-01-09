@@ -23,6 +23,8 @@
 %p
   %b Moves
   %br
+  = link_to "Fetch Moves", fetch_moves_day_path(@day)
+  %br
   Summary:
   %ul
     - @moves_summary.each do |summary|

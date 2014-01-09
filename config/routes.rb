@@ -13,7 +13,11 @@ QuantifiedLife::Application.routes.draw do
     end
   end
 
-  resources :days, only: [:index, :show, :edit, :update, :new, :create]
+  resources :days, only: [:index, :show, :edit, :update, :new, :create] do
+    member do
+      get :fetch_moves
+    end
+  end
 
   resources :users, only: [:index, :show, :edit, :update]
 

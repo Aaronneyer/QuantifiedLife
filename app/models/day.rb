@@ -22,6 +22,7 @@ class Day
   validates :date, presence: true, uniqueness: true
 
   after_create :add_locations
+  after_create :async_fetch_data
 
   def posts
     Post.where(date: date)
@@ -36,11 +37,20 @@ class Day
     end
   end
 
+  def self.fetch_moves(day_id)
+    Day.find(day_id).fetch_moves
+  end
+
   def fetch_moves
     client = Moves::Client.new(user.moves_token)
     self.moves_storyline = client.daily_storyline(date).first
     self.moves_summary = client.daily_summary(date).first
     self.save
+  end
+
+  #TODO: As more API's become integrated, have this start up tasks to fetch everything
+  def async_fetch_data
+    Day.delay.fetch_moves(self.id)
   end
 
   def moves_places

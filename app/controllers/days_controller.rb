@@ -1,9 +1,9 @@
 class DaysController < ApplicationController
-  before_action :set_day, only: [:show, :edit, :update]
+  before_action :set_day, only: [:show, :edit, :update, :fetch_moves]
   before_action :authenticate_user!
   before_action :set_and_check_viewer, only: [:index]
   before_action :check_viewable, only: [:show]
-  before_action :check_editable, only: [:edit, :update]
+  before_action :check_editable, only: [:edit, :update, :fetch_moves]
 
   # GET /days
   # GET /days.json
@@ -62,6 +62,11 @@ class DaysController < ApplicationController
         format.json { render json: @day.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def fetch_moves
+    @day.fetch_moves
+    redirect_to @day
   end
 
   private
