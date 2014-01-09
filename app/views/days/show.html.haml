@@ -21,6 +21,21 @@
   #{@day.start_location} => #{@day.end_location}
 
 %p
+  %b Moves
+  %br
+  Summary:
+  %ul
+    - @moves_summary.each do |summary|
+      %li= activity_text(summary)
+  Places:
+  %ul
+    - @day.moves_places.each do |place|
+      %li
+        %b= place
+  Storyline:
+  %ul= render partial: 'moves_segment', collection: @moves_segments
+
+%p
   %b Impact:
   = @day.impact
 %p

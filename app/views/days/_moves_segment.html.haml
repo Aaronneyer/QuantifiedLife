@@ -1,0 +1,10 @@
+%li
+  - if moves_segment['type'] == 'place'
+    At
+    %b= moves_segment['place']['name'] || 'unknown'
+  - elsif moves_segment['type'] == 'move'
+    Moved
+  from #{Time.parse moves_segment['startTime']} to #{Time.parse moves_segment['endTime']}
+  %ul
+    - (moves_segment['activities'] || []).each do |activity|
+      %li= activity_text(activity)

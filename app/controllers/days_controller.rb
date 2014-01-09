@@ -14,6 +14,8 @@ class DaysController < ApplicationController
   # GET /days/1
   # GET /days/1.json
   def show
+    @moves_segments = @day.moves_storyline['segments'] || []
+    @moves_summary = @day.moves_summary['summary'] || []
   end
 
   # GET /days/new

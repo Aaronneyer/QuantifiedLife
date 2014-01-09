@@ -5,6 +5,4 @@ class MovesController < ApplicationController
   def callback
     render text: params
   end
-
-  private
 end

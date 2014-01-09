@@ -12,6 +12,8 @@ class Day
   field :end_location, type: String, default: -> { start_location }
   field :impact, type: Fixnum, default: 0
   field :extra_info, type: Hash, default: -> { user.try(:extra_info) || {} }
+  field :moves_storyline, type: Hash, default: {}
+  field :moves_summary, type: Hash, default: {}
 
   belongs_to :user
 
@@ -32,5 +34,17 @@ class Day
         user.save
       end
     end
+  end
+
+  def fetch_moves
+    client = Moves::Client.new(user.moves_token)
+    self.moves_storyline = client.daily_storyline(date).first
+    self.moves_summary = client.daily_summary(date).first
+    self.save
+  end
+
+  def moves_places
+    moves_storyline['segments'].select{ |segment| segment['type'] == 'place' }.
+      map{ |segment| segment['place']['name'] }.compact
   end
 end

@@ -7,4 +7,12 @@ module DaysHelper
     else ''
     end
   end
+
+  def activity_text(activity)
+    "#{activity['activity']}'d #{number_with_delimiter activity['distance']} meters over #{readable_time(activity['duration'])}"
+  end
+
+  def readable_time(duration)
+    distance_of_time_in_words(Time.at(duration), Time.at(0))
+  end
 end
