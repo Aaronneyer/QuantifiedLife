@@ -46,6 +46,7 @@ class Day
     self.moves_storyline = client.daily_storyline(date).first
     self.moves_summary = client.daily_summary(date).first
     self.save
+  rescue RestClient::BadRequest
   end
 
   #TODO: As more API's become integrated, have this start up tasks to fetch everything
