@@ -1,13 +1,12 @@
 class Post < ActiveRecord::Base
   belongs_to :user
 
-  # Just for compatibility, will change later
   def tag_string
-    tags
+    tags.join(' ')
   end
 
   def tag_string=(new_tags)
-    self.tags = new_tags
+    self.tags = new_tags.split(' ')
   end
 
   #TODO: Needs user specific
