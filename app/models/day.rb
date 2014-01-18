@@ -17,6 +17,7 @@ class Day < ActiveRecord::Base
     self.headline ||= ''
     self.moves_storyline ||= {}
     self.moves_summary ||= {}
+    self.impact ||= 0
   end
 
   def posts
@@ -37,6 +38,7 @@ class Day < ActiveRecord::Base
   end
 
   def fetch_moves
+    return unless user.moves_token
     client = Moves::Client.new(user.moves_token)
     self.moves_storyline = client.daily_storyline(date).first
     self.moves_summary = client.daily_summary(date).first

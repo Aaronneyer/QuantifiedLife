@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authorize
   before_action :set_and_check_viewer, only: [:index]
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update]
@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.desc(:date)
+    @posts = Post.all.order('date DESC')
   end
 
   # GET /posts/1

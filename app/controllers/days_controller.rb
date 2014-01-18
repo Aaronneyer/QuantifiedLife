@@ -1,6 +1,6 @@
 class DaysController < ApplicationController
   before_action :set_day, only: [:show, :edit, :update, :fetch_moves]
-  before_action :authenticate_user!
+  before_action :authorize
   before_action :set_and_check_viewer, only: [:index]
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update, :fetch_moves]
@@ -8,7 +8,7 @@ class DaysController < ApplicationController
   # GET /days
   # GET /days.json
   def index
-    @days = Day.all.desc(:date)
+    @days = Day.all.order('date DESC')
   end
 
   # GET /days/1

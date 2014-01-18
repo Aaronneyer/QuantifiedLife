@@ -1,5 +1,9 @@
 %h1 Editing User
 
-= render 'form'
+= form_for(@user, html: { 'ng-controller' => 'UserCtrl' }) do |f|
+
+  = render partial: 'shared/metadata'
+
+  = f.submit 'Save User', class: 'btn'
 
 = link_to 'Show', @user

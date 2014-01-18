@@ -1,11 +1,11 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authorize
 
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all.desc(:date)
+    @photos = Photo.all.order('date DESC')
   end
 
   # GET /photos/1

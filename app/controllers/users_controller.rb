@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :authenticate_user!
+  before_action :authorize
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update]
 
   def index
-    @users = User.all.desc(:date)
+    @users = User.all
   end
 
   def show
