@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118201547) do
+ActiveRecord::Schema.define(version: 20140118210754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 20140118201547) do
     t.text     "body"
     t.date     "date"
     t.integer  "impact"
-    t.string   "tags"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tags",       default: [], array: true
   end
 
   create_table "users", force: true do |t|
@@ -71,7 +71,8 @@ ActiveRecord::Schema.define(version: 20140118201547) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "location_string",    default: ""
+    t.string   "locations",          default: [], array: true
+    t.string   "permitted_viewers",  default: [], array: true
   end
 
 end
