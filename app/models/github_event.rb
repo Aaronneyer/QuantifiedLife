@@ -34,12 +34,12 @@ class GithubEvent < ActiveRecord::Base
       done = false
       gh.activity.events.performed(gh.users.get.login, public: user.github_private).each_page do |page|
         page.each do |event|
-          if GithubEvent.where(github_id: event.id, user_id: user.id).exists?
+          if GithubEvent.where(github_id: event['id'], user_id: user.id).exists?
             done = true
             break
           else
             # ActiveModel lets through a hash but not a hashie.
-            GithubEvent.create!(info: event.to_hash, github_id: event['id'], user_id: user.id)
+            GithubEvent.create!(event: event.to_hash, github_id: event['id'], user_id: user.id)
           end
         end
         break if done
