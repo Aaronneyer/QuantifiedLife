@@ -1,9 +1,8 @@
 QuantifiedLife::Application.routes.draw do
   require 'sidekiq/web'
-  authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
-  devise_for :users
+  #authenticate :user, ->(u) { u.admin? } do
+  #  mount Sidekiq::Web => '/sidekiq'
+  #end
   resources :posts
 
   resources :photos do

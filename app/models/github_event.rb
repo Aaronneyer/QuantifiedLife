@@ -1,20 +1,7 @@
-class GithubEvent
-  include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
+class GithubEvent < ActiveRecord::Base
   include ActionView::Helpers
 
   belongs_to :user
-  field :created_at, type: Time
-  field :type, type: String
-  field :payload, type: Hash
-  field :repo, type: Hash
-  field :actor, type: Hash
-  field :org, type: Hash
-  field :id, type: String
-  field :public, type: Boolean
-
-  index({ user_id: 1, created_at: 1 })
-  index({ created_at: 1 })
 
   VALID_TYPES = %w[
     CommitCommentEvent CreateEvent DeleteEvent DownloadEvent FollowEvent
@@ -26,6 +13,11 @@ class GithubEvent
 
   def info_string
     'Unknown Github Event Type'
+  end
+
+  # This is a temporary shim until I fix the event structure
+  def method_missing(meth, *args)
+    info[meth.to_s]
   end
 
   class << self

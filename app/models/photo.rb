@@ -1,22 +1,6 @@
-class Photo
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Slug
+class Photo < ActiveRecord::Base
 
-  field :caption, type: String
-  field :filepicker_url, type: String
-  field :filename
-  field :date, type: Date
-  field :dropbox_path
-  field :exif, type: Hash
-
-  slug index: true do |doc|
-    [doc.filename, doc.filepicker_url].reject.first.to_url
-  end
-
-  belongs_to :user, index: true
-
-  index({ date: -1 })
+  belongs_to :user
 
   validates :filepicker_url, presence: true
 

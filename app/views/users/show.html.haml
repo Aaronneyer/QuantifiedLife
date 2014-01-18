@@ -43,7 +43,7 @@
 %p
   %b Permitted Viewers
   %ul
-    - @user.permitted_viewers.each do |viewer|
+    -# @user.permitted_viewers.each do |viewer|
       %li= User.find(viewer).email
 
 - if current_user.can_edit?(@user)

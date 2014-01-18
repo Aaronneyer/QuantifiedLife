@@ -1,27 +1,16 @@
-class Post
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Slug
-
-  field :title, type: String
-  slug :title, history: true
-  field :body, type: String
-  field :date, type: Date
-  field :impact, type: Fixnum
-  field :tags, type: Array, default: []
-
+class Post < ActiveRecord::Base
   belongs_to :user
 
-  index({ date: -1 })
-
+  # Just for compatibility, will change later
   def tag_string
-    tags.join(' ')
+    tags
   end
 
   def tag_string=(new_tags)
-    self.tags = new_tags.split
+    self.tags = new_tags
   end
 
+  #TODO: Needs user specific
   def day
     Day.where(date: date).first
   end

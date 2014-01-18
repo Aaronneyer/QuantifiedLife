@@ -1,28 +1,23 @@
-class Day
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Slug
+class Day < ActiveRecord::Base
   include ExtraInfoAttributes
-
-  field :date, type: Date, default: -> { Date.yesterday }
-  slug :date
-  field :headline, type: String, default: ''
-  field :summary, type: String
-  field :start_location, type: String
-  field :end_location, type: String, default: -> { start_location }
-  field :impact, type: Fixnum, default: 0
-  field :extra_info, type: Hash, default: -> { user.try(:extra_info) || {} }
-  field :moves_storyline, type: Hash, default: {}
-  field :moves_summary, type: Hash, default: {}
 
   belongs_to :user
 
-  index({ date: -1 }, { unique: true })
-
   validates :date, presence: true, uniqueness: true
+
+  after_initialize :defaults, unless: :persisted?
 
   after_create :add_locations
   after_create :async_fetch_data
+
+  def defaults
+    self.date ||= Date.yesterday
+    self.end_location ||= start_location
+    self.extra_info ||= user.try(:extra_info) || {}
+    self.headline ||= ''
+    self.moves_storyline ||= {}
+    self.moves_summary ||= {}
+  end
 
   def posts
     Post.where(date: date)

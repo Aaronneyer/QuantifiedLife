@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118150823) do
+ActiveRecord::Schema.define(version: 20140118192502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "newdays", force: true do |t|
+  create_table "days", force: true do |t|
     t.date     "date"
     t.string   "headline"
     t.text     "summary"
@@ -31,7 +31,13 @@ ActiveRecord::Schema.define(version: 20140118150823) do
     t.datetime "updated_at"
   end
 
-  create_table "newposts", force: true do |t|
+  create_table "github_events", force: true do |t|
+    t.json     "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
     t.date     "date"
@@ -42,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140118150823) do
     t.datetime "updated_at"
   end
 
-  create_table "newusers", force: true do |t|
+  create_table "users", force: true do |t|
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "confirmation_token"
