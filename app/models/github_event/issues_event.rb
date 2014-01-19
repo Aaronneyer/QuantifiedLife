@@ -1,5 +1,5 @@
 class GithubEvent::IssuesEvent < GithubEvent
   def info_string
-    "You #{payload['action']} the issue #{payload['issue']['url']}"
+    "You #{event['payload']['action']} the issue #{event['payload']['issue']['url']}"
   end
 end

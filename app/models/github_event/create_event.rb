@@ -1,12 +1,12 @@
 class GithubEvent::CreateEvent < GithubEvent
   def info_string
-    case payload['ref_type']
+    case event['payload']['ref_type']
     when 'repository'
-      "Created #{repo['name']} repository"
+      "Created #{event['repo']['name']} repository"
     when 'branch'
-      "Created branch #{payload['ref']} in #{repo['name']}"
+      "Created branch #{event['payload']['ref']} in #{event['repo']['name']}"
     when 'tag'
-      "Created tag #{payload['ref']} in #{repo['name']}"
+      "Created tag #{event['payload']['ref']} in #{event['repo']['name']}"
     end
   end
 end

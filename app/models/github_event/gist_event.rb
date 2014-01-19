@@ -1,5 +1,5 @@
 class GithubEvent::GistEvent < GithubEvent
   def info_string
-    "You #{payload['action']}d a gist"
+    "You #{event['payload']['action']}d a gist"
   end
 end

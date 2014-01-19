@@ -1,5 +1,5 @@
 class GithubEvent::DownloadEvent < GithubEvent
   def info_string
-    "Created download #{payload['download']['name']}"
+    "Created download #{event['payload']['download']['name']}"
   end
 end

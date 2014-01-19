@@ -1,5 +1,5 @@
 class GithubEvent::ReleaseEvent < GithubEvent
   def info_string
-    "You #{payload['action']} #{release['name']}"
+    "You #{event['payload']['action']} #{event['release']['name']}"
   end
 end

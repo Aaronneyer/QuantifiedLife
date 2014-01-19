@@ -1,5 +1,5 @@
 class GithubEvent::WatchEvent < GithubEvent
   def info_string
-    "You #{payload['action']} watching #{repo['name']}"
+    "You #{event['payload']['action']} watching #{event['repo']['name']}"
   end
 end

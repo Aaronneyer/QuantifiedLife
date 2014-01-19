@@ -1,5 +1,5 @@
 class GithubEvent::DeleteEvent < GithubEvent
   def info_string
-    "Deleted #{payload['ref_type']} #{payload['ref']} in #{repo['name']}"
+    "Deleted #{event['payload']['ref_type']} #{event['payload']['ref']} in #{event['repo']['name']}"
   end
 end

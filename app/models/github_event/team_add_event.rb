@@ -1,5 +1,5 @@
 class GithubEvent::TeamAddEvent < GithubEvent
   def info_string
-    "Added #{payload['user']['name']} to #{payload['team']['name']}"
+    "Added #{event['payload']['user']['name']} to #{event['payload']['team']['name']}"
   end
 end
