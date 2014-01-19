@@ -17,7 +17,7 @@ class GithubEvent < ActiveRecord::Base
 
   # This is a temporary shim until I fix the event structure
   def method_missing(meth, *args)
-    info[meth.to_s]
+    event[meth.to_s]
   end
 
   class << self
