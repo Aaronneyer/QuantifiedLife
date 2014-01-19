@@ -15,11 +15,6 @@ class GithubEvent < ActiveRecord::Base
     'Unknown Github Event Type'
   end
 
-  # This is a temporary shim until I fix the event structure
-  def method_missing(meth, *args)
-    event[meth.to_s]
-  end
-
   class << self
     # This job is called asynchronously every day
     def fetch_all_events
