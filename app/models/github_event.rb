@@ -18,7 +18,7 @@ class GithubEvent < ActiveRecord::Base
   class << self
     # This job is called asynchronously every day
     def fetch_all_events
-      User.each { |u| fetch_events(u.id) }
+      User.all.each { |u| fetch_events(u.id) }
       Github.delay_for(1.day).fetch_all_events
     end
 
