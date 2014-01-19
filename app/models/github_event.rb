@@ -9,7 +9,7 @@ class GithubEvent < ActiveRecord::Base
     MemberEvent PublicEvent PullRequestEvent PullRequestReviewCommentEvent
     PushEvent ReleaseEvent StatusEvent TeamAddEvent WatchEvent
   ]
-  before_create :set_type
+  #before_create :set_type
 
   def info_string
     'Unknown Github Event Type'
