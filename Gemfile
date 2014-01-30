@@ -1,37 +1,53 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
+
+# Core server things
 gem 'rails', '4.0.0'
-gem 'sass-rails'
+gem 'sinatra', require: nil
+gem 'unicorn'
+gem 'sidekiq'
+
+# Javascript things
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jbuilder', '~> 1.2'
-gem 'figaro'
-gem 'haml-rails'
-gem 'clearance'
-gem 'unicorn'
 gem 'angularjs-rails'
+
+# Pretty things
+gem 'sass-rails'
 gem 'bootstrap_form'
-gem 'pry-rails'
-gem 'pry'
-gem 'hashie'
-gem 'pg'
-gem 'postgres_ext'
-gem 'filepicker-rails'
-gem 'exifr'
-gem 'httparty'
-gem 'sidekiq'
-gem 'slim'
-gem 'sinatra', require: nil
+gem 'font-awesome-rails'
+
+# Markup stuff
+gem 'jbuilder', '~> 1.2'
+gem 'haml-rails'
 gem 'redcarpet'
 gem 'pygments.rb'
-gem 'font-awesome-rails'
-gem 'newrelic_rpm'
 
+# Database
+gem 'pg'
+gem 'postgres_ext'
+
+# Miscellaneous
+gem 'figaro'
+gem 'newrelic_rpm'
+gem 'pry-rails'
+gem 'pry'
+
+# Authentication/OAuth/API
+gem 'httparty'
+gem 'filepicker-rails'
+gem 'exifr'
 gem 'github_api'
 gem 'dropbox-sdk', require: 'dropbox_sdk'
 gem 'moves'
+gem 'clearance'
+
+# TODO: Check if these are still being used, and possibly remove
+gem 'slim'
+gem 'hashie'
+
 
 group :development do
   gem 'better_errors'
