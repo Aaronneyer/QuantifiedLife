@@ -9,8 +9,7 @@ class Post < ActiveRecord::Base
     self.tags = new_tags.split(' ')
   end
 
-  #TODO: Needs user specific
   def day
-    Day.where(date: date).first
+    Day.where(date: date, user_id: user.id).first
   end
 end

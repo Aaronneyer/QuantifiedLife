@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order('date DESC')
+    @posts = Post.where(user_id: @user.id).order('date DESC')
   end
 
   # GET /posts/1

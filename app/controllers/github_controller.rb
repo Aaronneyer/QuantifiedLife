@@ -3,7 +3,7 @@ class GithubController < ApplicationController
   before_action :set_and_check_viewer
 
   def index
-    @events = GithubEvent.where(user_id: @user.id).order('created_at DESC')
+    @events = GithubEvent.where(user_id: @user.id).order('id DESC')
   end
 
   def backfill

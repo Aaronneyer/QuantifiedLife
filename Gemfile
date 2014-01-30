@@ -27,6 +27,7 @@ gem 'sinatra', require: nil
 gem 'redcarpet'
 gem 'pygments.rb'
 gem 'font-awesome-rails'
+gem 'newrelic_rpm'
 
 gem 'github_api'
 gem 'dropbox-sdk', require: 'dropbox_sdk'

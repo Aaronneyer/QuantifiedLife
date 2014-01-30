@@ -8,7 +8,7 @@ class DaysController < ApplicationController
   # GET /days
   # GET /days.json
   def index
-    @days = Day.all.order('date DESC')
+    @days = Day.where(user_id: @user.id).order('date DESC')
   end
 
   # GET /days/1
