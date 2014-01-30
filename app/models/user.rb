@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :days
 
   def can_view?(user)
-    can_edit?(user)# || user.permitted_viewers.include?(self.id)
+    can_edit?(user) || user.permitted_viewers.include?(self.id)
   end
 
   def can_edit?(user)
