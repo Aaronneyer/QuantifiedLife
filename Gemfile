@@ -44,6 +44,10 @@ gem 'dropbox-sdk', require: 'dropbox_sdk'
 gem 'moves'
 gem 'clearance'
 
+# Testing stuff... ;(
+gem 'rspec-rails'
+gem 'capybara'
+
 # TODO: Check if these are still being used, and possibly remove
 gem 'slim'
 gem 'hashie'
