@@ -6,7 +6,7 @@
     %th Headline
     %th Cities
     %th Impact
-    - @user.default_extra_info.each do |key, _|
+    - @user.extra_info.each do |key, _|
       %th= key
 
   - @days.each do |day|
