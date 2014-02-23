@@ -2,11 +2,11 @@ class Post < ActiveRecord::Base
   belongs_to :user
 
   def tag_string
-    tags.join(' ')
+    tags.join(',')
   end
 
   def tag_string=(new_tags)
-    self.tags = new_tags.split(' ')
+    self.tags = new_tags.split(',')
   end
 
   def day
