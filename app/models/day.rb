@@ -21,7 +21,7 @@ class Day < ActiveRecord::Base
   end
 
   def posts
-    Post.where(date: date, user_id: id)
+    Post.where(date: date, user_id: user.id)
   end
 
   def add_locations
