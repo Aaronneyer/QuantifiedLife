@@ -31,4 +31,5 @@ QuantifiedLife::Application.routes.draw do
   get '/auth/moves/callback' => 'callback#moves'
 
   root to: "home#index"
+  get '/status' => 'home#status'
 end
