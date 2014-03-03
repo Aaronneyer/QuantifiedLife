@@ -102,7 +102,11 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -265,6 +269,7 @@ DEPENDENCIES
   hashie
   html2haml
   httparty
+  impressionist
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails

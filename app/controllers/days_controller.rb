@@ -4,6 +4,8 @@ class DaysController < ApplicationController
   before_action :set_and_check_viewer, only: [:index]
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update, :fetch_moves]
+  
+  impressionist actions: [:show, :index]
 
   # GET /days
   # GET /days.json

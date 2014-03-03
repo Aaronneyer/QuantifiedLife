@@ -32,6 +32,9 @@ gem 'postgres_ext'
 # Miscellaneous
 gem 'figaro'
 gem 'newrelic_rpm'
+gem 'impressionist'
+
+# Debugging
 gem 'pry-rails'
 gem 'pry'
 
