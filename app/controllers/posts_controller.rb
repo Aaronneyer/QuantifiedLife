@@ -5,6 +5,8 @@ class PostsController < ApplicationController
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update]
 
+  impressionist actions: [:show, :index]
+
   # GET /posts
   # GET /posts.json
   def index
