@@ -1,7 +1,4 @@
 class HomeController < ApplicationController
-
-  impressionist actions: [:index]
-  
   def index
   end
 
