@@ -33,6 +33,7 @@ gem 'postgres_ext'
 gem 'figaro'
 gem 'newrelic_rpm'
 gem 'impressionist'
+gem 'rails_12factor'
 
 # Debugging
 gem 'pry-rails'
