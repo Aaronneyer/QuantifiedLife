@@ -10,7 +10,7 @@ class Photo < ActiveRecord::Base
     self.exif = {}
     begin
       temp_exif = EXIFR::JPEG.new(photo_file).exif.to_hash
-    rescue Errno::ENOENT
+    rescue Errno::ENOENT, EXIFR::MalformedJPEG
       return
     end
     # JSON doesn't like rationals very much, so this fixes it up a bit
