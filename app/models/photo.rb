@@ -9,7 +9,9 @@ class Photo < ActiveRecord::Base
   def exif_file=(photo_file)
     self.exif = {}
     begin
-      temp_exif = EXIFR::JPEG.new(photo_file).exif.to_hash
+      temp = EXIFR::JPEG.new(photo_file).exif
+      return unless temp
+      temp_exif = temp.to_hash
     rescue Errno::ENOENT, EXIFR::MalformedJPEG
       return
     end
