@@ -8,12 +8,15 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.where(user_id: @user.id).order('date DESC')
+    @photos = Photo.where(user_id: @user.id).order('datetime DESC')
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
+    if params.has_key?(:partial)
+      render layout: false
+    end
   end
 
   # GET /photos/1/edit

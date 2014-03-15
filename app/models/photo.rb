@@ -13,6 +13,10 @@ class Photo < ActiveRecord::Base
   def next
     Photo.where("datetime > ?", datetime).order('datetime ASC').first
   end
+
+  def date
+    datetime.to_date
+  end
  
   def exif_file=(photo_file)
     self.exif = {}
@@ -54,7 +58,7 @@ class Photo < ActiveRecord::Base
   end
 
   def day
-    Day.where(date: datetime.to_date, user_id: user_id).first
+    Day.where(date: date, user_id: user_id).first
   end
 
   class << self

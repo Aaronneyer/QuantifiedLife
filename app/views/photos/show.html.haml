@@ -18,3 +18,19 @@
 = link_to 'Edit', edit_photo_path(@photo)
 \|
 = link_to 'Back', photos_path
+
+:javascript
+  var f = function(e) {
+    if (e.keyCode == 37) {
+      $('#main').load("#{url_for(@photo.prev)}?partial");
+      history.pushState({}, '', "#{url_for(@photo.prev)}");
+      $(document).unbind('keydown', f);
+      return false;
+    } else if (e.keyCode == 39) {
+      $('#main').load("#{url_for(@photo.next)}?partial");
+      history.pushState({}, '', "#{url_for(@photo.next)}");
+      $(document).unbind('keydown', f);
+      return false;
+    }
+  }
+  $(document).on('keydown', f);
