@@ -1,11 +1,14 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
   before_action :authorize
+  before_action :set_and_check_viewer, only: [:index]
+  before_action :check_viewable, only: [:show]
+  before_action :check_editable, only: [:edit, :update]
 
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all.order('date DESC')
+    @photos = Photo.where(user_id: @user.id).order('date DESC')
   end
 
   # GET /photos/1
@@ -41,13 +44,25 @@ class PhotosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def photo_params
-      params.require(:photo).permit(:caption)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def photo_params
+    params.require(:photo).permit(:caption)
+  end
+
+  def check_viewable
+    unless current_user.can_view?(@photo.user)
+      redirect_to root_path
     end
+  end
+
+  def check_editable
+    unless current_user.can_edit?(@photo.user)
+      redirect_to root_path
+    end
+  end
 end

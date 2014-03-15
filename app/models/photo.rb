@@ -4,7 +4,15 @@ class Photo < ActiveRecord::Base
 
   validates :s3_url, presence: true
 
-  before_create :set_date
+  before_create :set_datetime
+
+  def prev
+    Photo.where("datetime < ?", datetime).order('datetime DESC').first
+  end
+
+  def next
+    Photo.where("datetime > ?", datetime).order('datetime ASC').first
+  end
  
   def exif_file=(photo_file)
     self.exif = {}
@@ -27,29 +35,26 @@ class Photo < ActiveRecord::Base
     end
   end
 
-  def set_date
+  def set_datetime
     # Try and get the date from exif, in the various fields it would be stored in
     if self.exif
       self.exif = self.exif.with_indifferent_access
-      self.date ||= self.exif[:date_time_original]
-      self.date ||= self.exif[:date_time]
-      if self.exif[:gps_date_stamp]
-        self.date ||= Date.strptime(self.exif[:gps_date_stamp], '%Y:%m:%d')
-      end
+      self.datetime ||= self.exif[:date_time_original]
+      self.datetime ||= self.exif[:date_time]
     end
     # If we can't get it from exif, try and get it from filename
     if self.dropbox_path
       begin
-        self.date ||= Date.parse(File.basename(self.dropbox_path))
+        self.datetime ||= Time.strptime(File.basename(self.dropbox_path), '%Y-%m-%d %H.%M.%S')
       rescue ArgumentError
       end
     end
     # Fall back to the date it was uploaded
-    self.date ||= created_at.to_date
+    self.datetime ||= created_at
   end
 
   def day
-    Day.where(date: date).first
+    Day.where(date: datetime.to_date, user_id: user_id).first
   end
 
   class << self

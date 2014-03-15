@@ -3,13 +3,18 @@
   = @photo.caption
 
 %p
-  %b URL:
-  = @photo.s3_url
+  %b Photo:
+  = link_to @photo.s3_url do
+    = image_tag @photo.s3_url, class: 'photo'
 
 %p
   %b Date:
   = link_to @photo.date, @photo.day
 
+= link_to 'Prev', @photo.prev
+\|
+= link_to 'Next', @photo.next
+%br
 = link_to 'Edit', edit_photo_path(@photo)
 \|
 = link_to 'Back', photos_path

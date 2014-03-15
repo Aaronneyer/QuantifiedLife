@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315153759) do
+ActiveRecord::Schema.define(version: 20140315190332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20140315153759) do
     t.string   "caption"
     t.string   "s3_url"
     t.string   "filename"
-    t.date     "date"
+    t.datetime "datetime"
     t.string   "dropbox_path"
     t.json     "exif"
     t.integer  "user_id"

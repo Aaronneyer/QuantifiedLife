@@ -13,9 +13,3 @@
       %td= link_to photo.s3_url, photo.s3_url
       %td= photo.date
       %td= link_to 'Edit', edit_photo_path(photo)
-
-%br
-
-= link_to 'New photo', new_photo_path
-\|
-= link_to 'Batch Upload', batch_upload_photos_path
