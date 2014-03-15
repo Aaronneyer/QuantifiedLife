@@ -2,15 +2,16 @@
 
 %table
   %tr
-    %th Title
-    %th Body
-    %th Day
+    %th Caption
+    %th URL
+    %th Date
     %th
 
   - @photos.each do |photo|
     %tr
-      %td= link_to photo.caption, photo
-      %td= link_to photo.filepicker_url, photo.filepicker_url
+      %td= link_to photo.caption || "N/A", photo
+      %td= link_to photo.s3_url, photo.s3_url
+      %td= photo.date
       %td= link_to 'Edit', edit_photo_path(photo)
 
 %br

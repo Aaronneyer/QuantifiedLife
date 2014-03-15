@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303201700) do
+ActiveRecord::Schema.define(version: 20140315153759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,12 +65,15 @@ ActiveRecord::Schema.define(version: 20140303201700) do
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
-    t.string "caption"
-    t.string "filepicker_url"
-    t.string "filename"
-    t.date   "date"
-    t.string "dropbox_url"
-    t.json   "exif"
+    t.string   "caption"
+    t.string   "s3_url"
+    t.string   "filename"
+    t.date     "date"
+    t.string   "dropbox_path"
+    t.json     "exif"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|

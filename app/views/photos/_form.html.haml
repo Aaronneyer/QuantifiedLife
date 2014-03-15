@@ -3,9 +3,7 @@
     = f.label :caption
     = f.text_field :caption
 
-  .form-group
-    = f.label :filepicker_url, "Upload Picture"
-    = f.filepicker_field :filepicker_url, name: 'photo[filepicker_url]',
-      store_location: 'S3', mimetypes: 'image/jpeg'
+  %p
+    %b URL: #{@photo.s3_url}
 
   = f.submit "Save photo", class: 'btn'

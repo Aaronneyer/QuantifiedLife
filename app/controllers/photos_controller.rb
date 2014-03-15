@@ -13,56 +13,8 @@ class PhotosController < ApplicationController
   def show
   end
 
-  # GET /photos/new
-  def new
-    @photo = Photo.new
-  end
-
   # GET /photos/1/edit
   def edit
-  end
-
-  def batch_upload
-  end
-
-  def multi_create
-    errors = []
-    photos = []
-    photo_params[:filepicker_url].split(',').each do |url|
-      photo = Photo.new(photo_params.merge(filepicker_url: url))
-      if photo.valid?
-        photos << photo
-      else
-        errors << photo.errors
-      end
-    end
-
-    respond_to do |format|
-      if errors.blank?
-        photos.each(&:save!)
-        format.html { redirect_to photos_path, notice: 'photos were successfully created.' }
-        format.json { render action: 'index', status: :created, location: photos_path }
-      else
-        format.html { render action: 'batch_upload' }
-        format.json { render json: errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # photo /photos
-  # photo /photos.json
-  def create
-    @photo = Photo.new(photo_params)
-
-    respond_to do |format|
-      if @photo.save
-        format.html { redirect_to @photo, notice: 'photo was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /photos/1
@@ -96,6 +48,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:caption, :filepicker_url)
+      params.require(:photo).permit(:caption)
     end
 end

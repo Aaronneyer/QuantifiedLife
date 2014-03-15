@@ -41,7 +41,7 @@ gem 'pry'
 
 # Authentication/OAuth/API
 gem 'httparty'
-gem 'filepicker-rails'
+gem 'aws-sdk'
 gem 'exifr'
 gem 'github_api'
 gem 'dropbox-sdk', require: 'dropbox_sdk'
