@@ -17,6 +17,10 @@ class Photo < ActiveRecord::Base
   def date
     datetime.to_date
   end
+
+  def image_path(opts = {})
+    "/photos/image/#{filename}?#{opts.to_query}"
+  end
  
   def exif_file=(photo_file)
     self.exif = {}

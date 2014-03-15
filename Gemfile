@@ -34,6 +34,7 @@ gem 'figaro'
 gem 'newrelic_rpm'
 gem 'impressionist'
 gem 'rails_12factor'
+gem 'rmagick', require: 'RMagick'
 
 # Debugging
 gem 'pry-rails'

@@ -3,13 +3,13 @@
 %table
   %tr
     %th Caption
-    %th URL
+    %th Filename
     %th Date
     %th
 
   - @photos.each do |photo|
     %tr
       %td= link_to photo.caption || "N/A", photo
-      %td= link_to photo.s3_url, photo.s3_url
+      %td= link_to photo.filename, photo.image_path
       %td= photo.date
       %td= link_to 'Edit', edit_photo_path(photo)

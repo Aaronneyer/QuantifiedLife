@@ -19,6 +19,17 @@ class PhotosController < ApplicationController
     end
   end
 
+  def image
+    s3 = AWS::S3.new
+    blob = s3.buckets['quantifiedlife'].objects[params[:id]].read
+    # TODO: This might make things slow. Keep an eye on it
+    image = Magick::Image.from_blob(blob).first
+    if params[:resize]
+      image.resize_to_fit!(params[:resize].to_i)
+    end
+    send_data(image.to_blob, type: 'image/jpg', disposition: 'inline')
+  end
+
   # GET /photos/1/edit
   def edit
   end

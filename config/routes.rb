@@ -32,4 +32,5 @@ QuantifiedLife::Application.routes.draw do
 
   root to: "home#index"
   get '/status' => 'home#status'
+  get '/photos/image/:id' => 'photos#image', constraints: { id: /.+/ }
 end

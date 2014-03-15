@@ -1,11 +1,9 @@
 %p
-  %b Caption:
   = @photo.caption
 
 %p
-  %b Photo:
-  = link_to @photo.s3_url do
-    = image_tag @photo.s3_url, class: 'photo'
+  = link_to @photo.image_path do
+    = image_tag @photo.image_path({resize: 600}), class: 'photo'
 
 %p
   %b Date:
