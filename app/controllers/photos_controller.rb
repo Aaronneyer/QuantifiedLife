@@ -27,6 +27,7 @@ class PhotosController < ApplicationController
     if params[:resize]
       image.resize_to_fit!(params[:resize].to_i)
     end
+    response.headers['Expires'] = 1.month.from_now.httpdate
     send_data(image.to_blob, type: 'image/jpg', disposition: 'inline')
   end
 
