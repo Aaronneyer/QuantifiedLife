@@ -13,6 +13,20 @@ class DaysController < ApplicationController
     @days = Day.where(user_id: @user.id).order('date DESC')
   end
 
+  def export
+    # This is for penzu right now. If I need to export for other formats, this
+    # should take a parameter and adjust based on that
+
+    @days = Day.where(user_id: @user.id).order('date DESC')
+
+    text = "---------------------\n" +
+      "-- Penzu TXT Export\n" +
+      "---------------------" +
+      @days.map{ |d| [d.date.to_s, d.date.strftime('%A %B %d, %Y') + ': ' + d.headline, d.summary]}.join("\n\n")
+
+    render text: text
+  end
+
   # GET /days/1
   # GET /days/1.json
   def show

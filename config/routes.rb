@@ -16,6 +16,9 @@ QuantifiedLife::Application.routes.draw do
     member do
       get :fetch_moves
     end
+    collection do
+      get :export
+    end
   end
 
   resources :users, only: [:index, :show, :edit, :update]
