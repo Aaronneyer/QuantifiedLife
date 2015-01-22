@@ -21,8 +21,8 @@ class DaysController < ApplicationController
 
     text = "---------------------\n" +
       "-- Penzu TXT Export\n" +
-      "---------------------" +
-      @days.map{ |d| [d.date.to_s, d.date.strftime('%A %B %d, %Y') + ': ' + d.headline, d.summary]}.join("\n\n")
+      "---------------------\n\n" +
+      @days.map{ |d| [d.date.to_s, d.date.strftime('%A %B %d, %Y') + ': ' + d.headline, '-------', d.summary]}.join("\n\n")
 
     send_data(text, filename: 'ql-export.txt')
   end
