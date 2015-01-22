@@ -1,7 +1,7 @@
 class DaysController < ApplicationController
   before_action :set_day, only: [:show, :edit, :update, :fetch_moves]
   before_action :authorize
-  before_action :set_and_check_viewer, only: [:index]
+  before_action :set_and_check_viewer, only: [:index, :export]
   before_action :check_viewable, only: [:show]
   before_action :check_editable, only: [:edit, :update, :fetch_moves]
   
