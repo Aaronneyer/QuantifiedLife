@@ -24,7 +24,7 @@ class DaysController < ApplicationController
       "---------------------" +
       @days.map{ |d| [d.date.to_s, d.date.strftime('%A %B %d, %Y') + ': ' + d.headline, d.summary]}.join("\n\n")
 
-    render text: text
+    send_data(text, filename: 'ql-export.txt')
   end
 
   # GET /days/1
